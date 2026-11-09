@@ -170,6 +170,17 @@ Nach der Kalibrierung wurde die Goldfolie in den Strahlengang eingesetzt. Für d
 
 Um die Bethe-Bloch-Gleichung experimentell zu überprüfen und die genaue Dicke der Goldfolie zu ermitteln, wurde abschließend die Druckabhängigkeit des Energieverlusts der $\alpha$-Teilchen gemessen. Ausgehend von einem Kammerdruck von etwa $10\,\text{mbar}$ wurde der Druck stetig erhöht. Bei jedem Druckschritt wurde die maximale Spannungsamplitude am Oszilloskop abgelesen, woraus sich die Restenergie der Teilchen ergibt. Diese Messreihe wurde so lange fortgeführt, bis die Spannung konstant blieb und die Teilchen im Gasgemisch vollständig abgebremst wurden. Dieser Vorgang wurde zweimal durchgeführt, einmal mit und einmal ohne Goldfolie.
 \section{Auswertung}
+Nullmessung (Strahlprofil ohne Folie) Kombiniert für Gauss-Fit
+
+theta_null = [-3.0, -2.0, -1.5, -1.0, -0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0, 6.0, 7.0]
+t_null = [1000, 210, 140, 103, 81, 69, 63, 62, 60, 60, 66, 65, 69, 75, 90, 120, 275, 2080]
+counts_null = [1157, 1119, 1192, 1114, 1110, 1113, 1145, 1113, 1120, 1123, 1135, 1186, 1132, 1152, 1117, 1125, 1118, 1163]
+
+Rutherford-Streuung (Goldfolie)
+
+theta_ruth = [20.0, 15.0, 14.0, 10.0, 9.0, 8.0, 7.0, 6.0]
+t_ruth = [900, 900, 900, 1810, 630, 750, 550, 400]
+counts_ruth = [72, 136, 120, 1111, 529, 1112, 1107, 1165]
 
 \subsection{Aktivität der Americium-241-Probe}
 
