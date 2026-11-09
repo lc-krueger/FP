@@ -17,13 +17,158 @@
 \pagenumbering{arabic}
 
 \section{Zielsetzung}
-
+Ziel dieses Versuchs ist die experimentelle Bestätigung der Rutherfordschen Streuformel durch die Messung des differentiellen Wirkungsquerschnitts von $\alpha$-Teilchen an einer Goldfolie. Zudem wird das Strahlprofil der Americium-241 Quelle aufgenommen und der druckabhängige Energieverlust in Luft nach der Bethe-Bloch-Gleichung untersucht.
 
 \section{Theorie}
+Zu Beginn des 20. Jahrhunderts herrschte das Thomson'sche Atommodell vor, welches davon ausging, dass die positiven Ladungsträger und die Elektronen diffus über das gesamte Volumen des Atoms verteilt seien\footnote{Vgl. Povh, Bogdan: \textit{Teilchen und Kerne: Eine Einführung in die physikalischen Konzepte}, Springer-Lehrbuch, S. 13.}. Eine solche homogene Ladungsverteilung führt theoretisch dazu, dass Teilchen nur minimal abgelenkt werden, wobei sich diese kleinen Ablenkwinkel bei der Streuung an vielen Atomen einfach statistisch aufaddieren\footnote{Vgl. Demtröder, Wolfgang: \textit{Experimentalphysik 4}, S. 63-64.}. In der Konsequenz ergäbe sich für den Streuwinkel eine Gaußverteilung mit sehr geringer Halbwertsbreite um $0^\circ$ herum\footnote{Vgl. Demtröder, S. 64.}.
 
+In dem klassischen Streuexperiment von Rutherford, Geiger und Marsden (1909), bei dem $\alpha$-Teilchen an schweren Atomen wie hier an einer Goldfolie gestreut wurden, wurde diese Annahme experimentell widerlegt\footnote{Vgl. Povh, S. 13 / Vgl. Demtröder, S. 64.}. Die makroskopisch gemessene Winkelverteilung zeigte, dass unerwartet große Streuwinkel bis hin zu $180^\circ$ auftraten \footnote{Vgl. Demtröder, S. 64.}. Dies war mit einer diffusen Ladungsverteilung nicht zu erklären und führte Rutherford zu der Schlussfolgerung, dass die positive Ladung und nahezu die gesamte Masse des Atoms in einem räumlich konzentrierten Atomkern in der Größenordnung von $10^{-14}$ bis $10^{-15}\text{ m}$ komprimiert sein muss\footnote{Vgl. Povh, S. 13 / Vgl. Demtröder, S. 64-65.}. Die Ablenkung der $\alpha$-Teilchen wird dabei fast ausschließlich durch das starke Coulomb-Feld des Kerns bestimmt \footnote{Vgl. Povh, S. 13.}. Die Elektronen können dabei aufgrund ihrer im Vergleich geringen Masse ($m_e \ll m_\alpha$) für die Ablenkung der schweren Teilchen vernachlässigt werden\footnote{Vgl. Demtröder, S. 64.}.
 
+\subsection{Energieverlust und Bethe-Bloch-Gleichung}
+Wenn geladene Teilchen wie $\alpha$-Teilchen Materie durchqueren, geben sie ihre Energie vorwiegend durch inelastische Stöße ab. Dies geschieht zu einem großen Teil durch elektromagnetische Wechselwirkungen mit den Hüllenelektronen, welche zur Anregung oder Ionisation der Atome führen\footnote{Vgl. Povh, Bogdan: \textit{Teilchen und Kerne: Eine Einführung in die physikalischen Konzepte}, Springer-Lehrbuch, S. 412.}. Da die Masse des einfallenden $\alpha$-Teilchens die Elektronenmasse um ein Vielfaches übersteigt ($m_\alpha \gg m_e$), folgt aus diesen Stößen ein kontinuierlicher Energieverlust ohne nennenswerte Richtungsänderung des Teilchens.
+
+Der mittlere Energieverlust pro Wegstrecke $\mathrm{d}x$ wird dabei durch die Bethe-Bloch-Gleichung beschrieben
+\begin{equation}
+    -\frac{\mathrm{d}E}{\mathrm{d}x} = \frac{4\pi e^4 z^2 N Z}{m_0 v^2 (4\pi\epsilon_0)^2} \ln \left( \frac{2 m_0 v^2}{I} \right).
+\end{equation}
+Hierbei ist $N$ die Anzahl der Atome pro Volumen, $Z$ die Kernladungszahl des Materials und $I$ dessen mittlere Ionisationsenergie. Für das einfallende Teilchen beschreiben $z$ die Ladungszahl mit $z=2$ für $\alpha$-Teilchen und $v$ die Teilchengeschwindigkeit.\footnote{Die Variablendefinitionen entstammen der Versuchsanleitung V16, S. 1.}.
+Eine wichtige Eigenschaft, die aus der Gleichung hervorgeht ist, dass der Energieverlust durch Ionisation maßgeblich von der Ladung $z$ und der Geschwindigkeit $v$ des Teilchens abhängt, auf der anderen Seite aber unabhängig von seiner Masse ist\footnote{Vgl. Povh, S. 412.}. Für die hier betrachteten nicht-relativistischen $\alpha$-Teilchen ($v \ll c$) fällt der Energieverlust in erster Näherung proportional zu $1/v^2$ ab. Klassisch lässt sich diese Geschwindigkeitsabhängigkeit über die effektive Wechselwirkungszeit $\Delta t$ beim Stoß beschreiben. Je langsamer das $\alpha$-Teilchen am Hüllenelektron vorbeifliegt, desto länger wirkt die Coulomb-Kraft. Da der Impulsübertrag $\Delta p$ direkt proportional zur Wechselwirkungszeit $\Delta t \propto 1/v$ ist, folgt für den kinetischen Energieübertrag des Stoßes\footnote{Vgl. Kolanoski, Hermann / Wermes, Norbert: \textit{Teilchendetektoren: Grundlagen und Anwendungen}, Springer Spektrum, S. 36.}:
+\begin{equation}
+    \Delta E = \frac{(\Delta p)^2}{2m} \propto \frac{1}{v^2}
+\end{equation}
+Die materialabhängige mittlere Ionisationsenergie $I$ lässt sich dabei für Kernladungszahlen $Z > 1$ abschätzen über\footnote{Vgl. Povh, ebd.}:
+\begin{equation}
+    I \approx 16\,\text{eV} \cdot Z^{0,9}
+\end{equation}
+
+Dieser Zusammenhang wird im Rahmen der Auswertung angewendet, um aus dem druckabhängigen Energieverlust in der Luftkammer die effektive Reichweite der $\alpha$-Teilchen und daraus anschließend die Dicke der Goldfolie zu bestimmen.
+
+\subsection{Rutherford-Streuung}
+Bei der Wechselwirkung der $\alpha$-Teilchen mit den Atomkernen des Materials bewirkt die elektrostatische Coulomb-Kraft eine Richtungsänderung des einfallenden Teilchens um den Streuwinkel $\Theta$\footnote{Vgl. Povh, Bogdan: \textit{Teilchen und Kerne: Eine Einführung in die physikalischen Konzepte}, Springer-Lehrbuch, S. 13.}. Die Rutherford-Streuformel beschreibt den differentiellen Wirkungsquerschnitt $\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}(\Theta)$ für diesen Prozess\footnote{Vgl. Versuchsanleitung V16: \textit{Rutherford Streuexperiment}, S. 1.}:
+\begin{equation}
+    \frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}(\Theta) = \frac{1}{(4\pi\epsilon_0)^2} \left( \frac{z Z e^2}{4 E_\alpha} \right)^2 \frac{1}{\sin^4 \left(\frac{\Theta}{2}\right)}
+\end{equation}
+Hierbei ist $E_\alpha$ die mittlere kinetische Energie des $\alpha$-Teilchens, $z$ dessen Ladungszahl ($z=2$) und $Z$ die Kernladungszahl des Materials. 
+
+Diese klassische Herleitung stimmt mit der quantenmechanischen ersten Born'schen Näherung überein und setzt dabei einige Idealisierungen voraus\footnote{Vgl. Povh, S. 60.}. Der Kern und das $\alpha$-Teilchen werden als punktförmige Ladungen vereinfacht. Die räumliche Ausdehnung der Kernladungsverteilung, quantenmechanisch beschrieben durch einen Formfaktor, bleibt dabei unberücksichtigt\footnote{Vgl. Povh, S. 62.}. Zudem wird der Goldkern als unendlich schwer angenommen, sodass er keinen kinematischen Rückstoß erfährt\footnote{Vgl. Povh, S. 60.}. Der Stoß verläuft demnach rein elastisch und die kinetische Energie des Projektils bleibt erhalten\footnote{Vgl. Povh, S. 62.}. Weiter beschränkt sich die Formel auf die isolierte Einfachstreuung am Coulomb-Potential.
+
+Bei größeren Schichtdicken durch Mehrfachstreuung oder bei sehr kleinen Streuwinkeln, wo die Hüllenelektronen das Kernpotential abschirmen, verliert diese Gleichung ihre Gültigkeit. Diese theoretischen Grenzen werden in der Auswertung anhand der Abweichungen im Kleinwinkelbereich analysiert.
+
+\subsection{Geometrie des Raumwinkels}
+Bei Streuexperimenten wird experimentell nicht die Gesamtzahl aller gestreuten Teilchen detektiert, sondern nur ein Bruchteil, der in einen spezifischen Raumwinkel $\Omega$ abgelenkt und vom Detektor erfasst wird\footnote{Vgl. Povh, Bogdan: \textit{Teilchen und Kerne: Eine Einführung in die physikalischen Konzepte}, Springer-Lehrbuch, S. 50.}. Die gemessene Zählrate an einem Detektor der Fläche $A$ im Abstand $d$ zum Streuzentrum ist dabei direkt proportional zu diesem abgedeckten Raumwinkel\footnote{Vgl. Demtröder, Wolfgang: \textit{Experimentalphysik 4}, S. 58.}.
+Der exakte Raumwinkel $\Omega$ eines kreisförmigen Detektors mit dem Radius $r$ berechnet sich über den halben Öffnungswinkel $\theta$ des vom Detektor aufgespannten Kegels:
+\begin{equation}
+    \Omega = 2\pi \left( 1 - \cos\theta \right) = 2\pi \left( 1 - \frac{d}{\sqrt{d^2 + r^2}} \right)
+\end{equation}
+
+Für den vorliegenden Versuchsaufbau ist der Radius des Detektors sehr klein gegenüber dem geometrischen Abstand zum Am-241 Präparat. Durch Ausklammern von $d$ im Nenner und eine anschließende Taylor-Entwicklung 1. Ordnung mit der binomischen Näherung $(1+x)^n \approx 1 + nx$ für $|x| \ll 1$ ergibt sich für diesen Fall
+\begin{equation}
+    \left( 1 + \left(\frac{r}{d}\right)^2 \right)^{-1/2} \approx 1 - \frac{1}{2}\left(\frac{r}{d}\right)^2
+\end{equation}
+
+Setzt man diesen Ausdruck in die Ausgangsgleichung ein unter der Bedingung, dass die Detektorfläche $A = \pi r^2$ verschwindend gering im Vergleich zum Abstandsquadrat ist ($A \ll d^2$), bricht die Taylor-Entwicklung nach dem linearen Glied ab und der Raumwinkel vereinfacht sich zu:
+\begin{equation}
+    \Omega \approx 2\pi \left( 1 - \left( 1 - \frac{1}{2}\frac{r^2}{d^2} \right) \right) = \pi \frac{r^2}{d^2} = \frac{A}{d^2}
+\end{equation}
+
+Diese geometrische Näherung wird im Rahmen der weiteren Auswertung angewendet, um aus dem Aufbau die experimentelle Aktivität der Quelle sowie den differentiellen Wirkungsquerschnitt zu berechnen. 
+
+\subsection{Aktivität und radioaktiver Zerfall}
+Die Aktivität $A(t)$ einer radioaktiven Probe gibt die Anzahl der Zerfälle pro Zeit an. Da der spontane Zerfall eines instabilen Kerns ein statistischer Prozess ist, wird die zeitliche Abnahme der Aktivität eines makroskopischen Präparats durch das radioaktive Zerfallsgesetz beschrieben:
+\begin{equation}
+    A(t) = A_0 \cdot e^{-\lambda t} = A_0 \cdot \left(\frac{1}{2}\right)^{\frac{t}{T_{1/2}}}
+\end{equation}
+Hierbei ist $A_0$ die Anfangsaktivität zum Zeitpunkt $t=0$,  $\lambda$ die materialspezifische Zerfallskonstante und $T_{1/2}$ die Halbwertszeit des betrachteten Isotops. 
+
+Für den vorliegenden Versuch wird als Strahlenquelle das Isotop $^{241}\text{Am}$ verwendet, welches unter der Emission von $\alpha$-Teilchen zerfällt. Mithilfe des Zerfallsgesetzes wird als Vorbereitung zunächst die theoretische Erwartungsaktivität der Quelle für den Zeitpunkt der Versuchsdurchführung berechnet. Als Referenzwert dient dabei die Angabe von $330\,\text{kBq}$ aus dem Oktober 1994\footnote{Vgl. Versuchsanleitung V16: \textit{Rutherford Streuexperiment}, S. 4.}.
+
+Um diesen theoretischen Wert der Quelle experimentell zu überprüfen, wird die Aktivität zusätzlich aus der Leermessung ohne Folie bestimmt. Unter der Annahme, dass die ungerichtete Strahlenquelle isotrop in die gesamte Raumkugel mit Raumwinkel $4\pi$ emittiert, lässt sich die experimentelle Aktivität $A_{\text{exp}}$ aus der maximalen Zählrate des Primärstrahls $I_0$ ableiten. Da die Strahlenquelle isotrop in alle Richtungen emittiert, verhält sich die gemessene Zählrate $I_0$ zur Gesamtaktivität $A_{\text{exp}}$ genau wie der Detektorraumwinkel $\Omega$ zum vollen Raumwinkel $4\pi$ einer Kugel ($\frac{I_0}{A_{\text{exp}}} = \frac{\Omega}{4\pi}$). Durch Umstellen dieser Proportionalität folgt direkt:
+\begin{equation}
+    A_{\text{exp}} = I_0 \cdot \frac{4\pi}{\Omega}
+\end{equation}
+Das Präparat $^{241}\text{Am}$ zerfällt unter Aussendung von $\alpha$-Strahlung zu Neptunium $^{237}\text{Np}$. 
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Thermschema.png}
+    \caption{Termschema des $\alpha$-Zerfalls von $^{241}\text{Am}$ zu $^{237}\text{Np}$ (Quelle: National Nuclear Data Center, NuDat 3, \url{https://www.nndc.bnl.gov/nudat3/replotdec.jsp})}
+    \label{fig:termschema}
+\end{figure}
+
+Wie dem Termschema in Abbildung \ref{fig:termschema} zu entnehmen ist, finden bei diesem Zerfallsprozess verschiedene Übergänge auf unterschiedliche Energieniveaus des Tochterkerns statt. Für die Versuchsdurchführung und Auswertung ist jedoch vor allem der Hauptübergang entscheidend. In $84{,}4\,\%$ der Zerfälle werden $\alpha$-Teilchen mit einer kinetischen Energie von $5485{,}56\,\text{keV}$ emittiert. Da die Intensität der benachbarten Energielinien vergleichsweise gering ist, kann der Strahl in näherungsweise als monoenergetisch betrachtet werden. Diese Startenergie von $E_0 = 5{,}486\,\text{MeV}$ ist der Referenzwert für alle nachfolgenden Berechnungen.
+
+\section{Versuchsaufbau}
+\subsection{Streukammer}
+Das Americium-241 Präparat befindet sich im Versuch in der zylindrischen Vakuum-Streukammer aus Metall. Einen Überblick über die Laborapparatur liefert Abbildung \ref{fig:aufbau_foto}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Aufbau_foto.jpg}
+    \caption{\textbf{Aufbau Rutherford Streu-Versuch} }
+    In der Mitte befindet sich die zylindrische Vakuumkammer in welcher sich der $\alpha$-Strahler, die Goldfolie und der schwenkbare Detektor befinden. Über einen Metallwellschlauch auf der linken Seite ist die Kammer mit der Scrollpumpe verbunden, der Innendruck wird über ein digitales Handmessgerät überwacht. An der rechten Seite wird das Detektorsignal ausgeleitet und im Oszilloskop visualisiert.
+    \label{fig:aufbau_foto}
+\end{figure}
+
+Als Quelle dient der $\alpha$-Strahler $^{241}\text{Am}$. Der Strahl trifft im Zentrum der Kammer auf die Goldfolie. Die Detektion der gestreuten Teilchen erfolgt über einen Oberflächensperrschichtzähler, der auf einem Schwenkarm montiert ist. Dieser Arm lässt sich von außen über eine Drehdurchführung rotieren, wobei der eingestellte Streuwinkel $\Theta$ an einer äußeren Skala abgelesen werden kann. 
+
+Die Abmessungen des Strahlengangs sind in der Skizze in Abbildung \ref{fig:abmessungen} zusammengefasst.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Abmessungen.png}
+    \caption{\textbf{Schematische Darstellung der inneren Streukammer.} 
+    Die Abbildung illustriert die geometrischen Abmessungen des Versuchsaufbaus, insbesondere die Distanzen zwischen der Quelle, Goldfolie und dem schwenkbaren Halbleiterdetektor. Entnommen aus \cite{tudoV16}.}
+    \label{fig:abmessungen}
+\end{figure}
+
+Da die $^{241}\text{Am}$ Quelle in alle Richtungen strahlt, wird der Teilchenstrahl durch zwei rechteckige Schlitzblenden mit der Abmessung $2\,\text{mm} \times 10\,\text{mm}$ kollimiert. Diese Blenden schirmen alle Teilchen ab, die nicht druch die Blende fliegen, und definieren so direkt den effektiven Raumwinkel $\Omega$, den der Detektor abdeckt.
+\subsection{Messelektronik und Signalverarbeitung}
+Zur Impulserfassung dient ein Silizium-Halbleiterdetektor, spezifisch ein sogenannter Oberflächensperrschichtzähler (Surface Barrier Detector). Die Funktionsweise basiert auf der charakteristischen Bandstruktur von Halbleitern. Ein voll besetztes Valenzband und ein leeres Leitungsband sind durch eine energetisch relativ kleine Bandlücke voneinander getrennt. 
+Trifft $\alpha$-Strahlung auf den Detektor, überträgt sie ihre kinetische Energie durch Stoßionisation auf die Elektronen im Valenzband. Diese überwinden die Bandlücke und gelangen in das Leitungsband, wodurch freie Elektronen-Loch-Paare entstehen. Da die Erzeugung eines solchen Paares im Silizium im Mittel eine feste Energie von ca. $3,6\,\text{eV}$ erfordert, ist die Gesamtzahl der generierten primären Ladungsträger direkt proportional zur deponierten Energie der einfallenden Strahlung \footnote{Vgl. Medizinphysik-Wiki: \textit{Halbleiter}, \url{https://medizinphysik.wiki/glossar/halbleiter/}, abgerufen am 08.11.2026.} . 
+Damit diese Ladungsträger nicht sofort wieder rekombinieren, wird eine externe elektrische Sperrspannung an den Halbleiter angelegt. Diese verarmt die aktive Zone an freien Ladungsträgern und baut ein elektrisches Feld auf. Die durch das $\alpha$-Teilchen erzeugten Elektronen werden in diesem Feld in entgegengesetzte Richtungen beschleunigt und driften zu den Elektroden, was den messbaren Stromimpuls erzeugt.
+
+Der Impuls wird durch einen Pre-Amplifier integriert und in einen proportionalen Spannungsimpuls umgewandelt. Danach läuft das Signal weiter in den Shape-Amplifier. Dieser verstärkt es nicht nur, sondern formt den anfänglich asymmetrischen Puls in ein sauberes, gaußähnliches Signal um. Diese Pulsformung verbessert das Signal-Rausch-Verhältnis signifikant und verhindert Signalüberlagerungen bei hohen Zählraten. Ganz am Ende wird das fertige Signal aufgeteilt, ein Teil geht in das Oszilloskop. Parallel dazu läuft das Signal in die Zähleinheit. Dort sorgt ein vorgeschalteter Diskriminator dafür, dass das elektronische Hintergrundrauschen einfach abgeschnitten wird, sodass am Ende nur die echten $\alpha$-Teilchen Impulse für die Winkelverteilung gezählt werden.
+
+\subsection{Vakuumsystem und Pumpentechnik}
+Um die Streuung der $\alpha$-Teilchen an Luftmolekülen und den damit einhergehenden Energieverlust gemäß der Bethe-Bloch-Gleichung zu minimieren, muss die gesamte Streukammer evakuiert werden. Zur Erzeugung des benötigten Vakuums kommen prinzipiell zwei Arten von Rotationsverdrängerpumpen infrage, die sich in ihrer Funktionsweise und Eignung für sensible Messapparaturen unterscheiden, die Drehschieberpumpe und die Scrollpumpe.
+
+\textbf{Ölgeschmierte Drehschieberpumpe} \\
+Die Drehschieberpumpe besteht aus einem zylindrischen Stator, in dessen Innerem sich ein exzentrisch gelagerter Rotor dreht\footnote{Vgl. Jousten, K. (Hrsg.): \textit{Wutz Handbuch Vakuumtechnik}, Springer Vieweg, S. 196.}. Wie in Abbildung \ref{fig:drehschieber} dargestellt, befinden sich in den Schlitzen des Rotors bewegliche Schieber, die durch die Zentrifugalkraft an die Gehäusewand gedrückt werden. Diese Schieber unterteilen den Raum in sich verändernde, sichelförmige Schöpfräume. Das einströmende Gas wird eingeschlossen, durch die Rotation des Rotors verdichtet und schließlich durch ein Auslassventil ausgestoßen\footnote{Vgl. Wutz, ebd.}. Um die feinen Spalte zwischen Rotor, Schieber und Stator effektiv abzudichten, wird in diesen Pumpen ein hochwertiges Mineralöl als Betriebsmittel eingesetzt. Durch diese Öldichtung erreichen einstufige Ausführungen zuverlässig Enddrücke im Feinvakuumbereich von typischerweise $0,1\,\text{hPa}$ bis $20\,\text{hPa}$\footnote{Vgl. Wutz, S. 198.}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Drehschieberpumpe.png}
+    \caption{\textbf{Funktionsprinzip einer einstufigen Drehschieberpumpe in sechs Phasen (a–f).} 
+    Die schematische Darstellung zeigt den Arbeitszyklus, bestehend aus Ansaugen, Verdichten und Ausstoßen des Gases. (a–c) Ansaugphase: Das Volumen der saugseitigen Zelle vergrößert sich, wodurch Gas durch den Einlass in die Pumpe strömt. (d) Verdichtungsphase: Die Schöpfzelle ist vom Einlass getrennt; das eingeschlossene Gasvolumen wird durch die weitere Rotation komprimiert. (e) Gasballast-Zufuhr. (f) Ausstoßphase: Das komprimierte Gas-Dampf-Gemisch öffnet das Auslassventil gegen den atmosphärischen Druck und wird ausgestoßen.}
+    \label{fig:drehschieber}
+\end{figure}
+
+Trotz der hohen Zuverlässigkeit und Langlebigkeit besitzt die Ölschmierung für das Rutherford-Experiment den entscheidenden Nachteil, dass Hoch- und Feinvakuumbereich  Öldämpfe entgegen der Pumprichtung in die Messkammer zurückströmen können. Dieser Dampf kann sich im Raum ausbreiten und im schlechtesten Fall die Messung beeinträchtigen. 
+
+\textbf{Scrollpumpe} \\
+Eine Alternative bietet die Scrollpumpe, deren Verdichtungsprinzip auf zwei ineinandergreifenden archimedischen Spiralen beruht\footnote{Vgl. Wutz, S. 210.}. Während eine der Spiralen starr im Gehäuse fixiert ist, führt die zweite Spirale eine zentralsymmetrische, oszillierende Bewegung das sogenannte Orbitieren aus\footnote{Vgl. Wutz, ebd.}. Durch diese exzentrische Relativbewegung entstehen halbmondförmige Gasvolumina, die das Gas kontinuierlich von der Außenseite in das Zentrum der Spirale fördern und dort in Richtung des Auslasses verdichten\footnote{Vgl. Wutz, S. 210-211.} (siehe Abbildung \ref{fig:scroll}).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Scrollpumpe.png}
+    \caption{\textbf{Der Weg des Gases in der Scroll-Spirale.} 
+    Die Abbildung zeigt das Verdichtungsprinzip durch zwei ineinandergreifende archimedische Spiralen. Durch die zentralsymmetrische Oszillation (Orbitieren) der beweglichen Spirale gegenüber der feststehenden Spirale wird das einströmende Gas am äußeren Rand in halbmondförmigen Volumina eingeschlossen. Diese Gastaschen wandern kontinuierlich in das Zentrum der Spirale, wodurch der Druck stetig ansteigt, bis das verdichtete Gas schließlich durch die zentrale Auslassöffnung ausgestoßen wird.}
+    \label{fig:scroll}
+\end{figure}
+
+Der Vorteil dieses Pumpentyps ist der absolut trockenlaufende und ölfreie Betrieb. Die dynamische Abdichtung der Kammern erfolgt hierbei nicht durch Flüssigkeiten, sondern rein durch minimale Fertigungstoleranzen der Spiralwände sowie durch flexible Kunststoffdichtungen an den Stirnflächen\footnote{Vgl. Wutz, S. 211.}. Scrollpumpen erreichen Enddrücke im Bereich von ca. $10^{-2}\,\text{hPa}$ und reichen damit nicht ganz an die extremen Vakuumwerte mehrstufiger ölgeschmierter Pumpen heran\footnote{Vgl. Wutz, S. 212.}. Dafür gewährleisten sie jedoch eine vollständig kohlenwasserstofffreie Evakuierung. Für die Evakuierung der Streukammer kam im Versuch eine trockene Scroll-Vakuumpumpe vom Typ Pfeiffer Vacuum HiScroll 18 (DN 25 ISO-K) zum Einsatz, welche am Pumpenstand laut Anzeige einen minimalen Druck von $1,4 \cdot 10^{-1}\,\text{mbar}$ ($0,14\,\text{hPa}$) erreichte. Die eigentlichen Messreihen wurden im Versuch jedoch bereits ab einem stabilisierten Kammerdruck von ca. $10\,\text{mbar}$ ($10\,\text{hPa}$) begonnen. Die Restgasdichte ist bei diesem Druck bereits so reduziert, dass der Energieverlust der $\alpha$-Teilchen auf der kurzen Flugstrecke zwischen Streuzentrum und Detektor gemäß der Bethe-Bloch-Gleichung vernachlässigt werden kann.
 \section{Durchführung}
+Am Anfang der Messungen wurde die Sperrspannung des Halbleiterdetektors auf $12\,\text{V}$ eingestellt und die Strahlungsquelle hochgefahren. Zudem wurde am Oszilloskop als Grundeinstellung die Mittelwert-Funktion eingestellt, um das Signal zu glätten.
+Damit das elektronische Hintergrundrauschen von den Messsignalen getrennt ist, wurde als Erstes der Diskriminator justiert. Dazu wurde die Diskriminatorschwelle schrittweise erhöht, bis auf dem Oszilloskop keine kleinen Amplituden mehr zu sehen waren. Dieser Zustand wurde bei einem Schwellenwert von 6 erreicht.
+Im Anschluss wurden die charakteristischen Signalbilder am Oszilloskop aufgenommen. Dabei wurde das ursprüngliche Signal direkt aus dem Pre-Amplifier mit dem Puls nach dem Shape-Amplifier optisch verglichen und dokumentiert.
 
+Vor der eigentlichen Streumessung an der Goldfolie wurde zunächst der ungestörte Primärstrahl vermessen. Ziel war es, das Strahlprofil aufzunehmen und die maximale einfallende Intensität $I_0$ zu bestimmen. Diese ungestörte Intensität wird benötigt, um die experimentelle Aktivität der $^{241}\text{Am}$-Quelle berechnen zu können.
+Dazu wurde der Detektor ohne eingesetzte Folie in kleinen Winkelschritten in die positive und negative Richtung um den vorläufigen mechanischen Nullpunkt herum geschwenkt. Um die statistische Unsicherheit gering zu halten, wurde für die Messintervalle nach Möglichkeit eine Ereigniszahl von mindestens $1111$ Counts angepeilt. Nach der Poisson-Statistik ($\Delta N / N = 1/\sqrt{N}$) entspräche dies einem angestrebten relativen Fehler von $3\,\%$. 
+Aus den notierten Messzeiten und Counts ergab sich eine gaußförmige Zählratenverteilung. Das Maximum dieser Gaußkurve markiert das Zentrum und die höchste Intensität des Primärstrahls. An der gefundenen Maximumsposition wurde die Winkelskala der Apparatur direkt physisch auf $0^\circ$ neu kalibriert. Dadurch entsprach bei den darauffolgenden Messungen der abgelesene Winkel dem wahren Streuwinkel.
+
+Nach der Kalibrierung wurde die Goldfolie in den Strahlengang eingesetzt. Für die Rutherford-Messung wurde der Detektor auf Winkel außerhalb des soeben ausgemessenen Primärstrahl-Intervalls eingestellt. Hier wurden für verschiedene Winkel in positive Richtung Counts $N$ und Messdauer erfasst.
+
+Um die Bethe-Bloch-Gleichung experimentell zu überprüfen und die genaue Dicke der Goldfolie zu ermitteln, wurde abschließend die Druckabhängigkeit des Energieverlusts der $\alpha$-Teilchen gemessen. Ausgehend von einem Kammerdruck von etwa $10\,\text{mbar}$ wurde der Druck stetig erhöht. Bei jedem Druckschritt wurde die maximale Spannungsamplitude am Oszilloskop abgelesen, woraus sich die Restenergie der Teilchen ergibt. Diese Messreihe wurde so lange fortgeführt, bis die Spannung konstant blieb und die Teilchen im Gasgemisch vollständig abgebremst wurden. Dieser Vorgang wurde zweimal durchgeführt, einmal mit und einmal ohne Goldfolie.
 \section{Auswertung}
 
 \subsection{Aktivität der Americium-241-Probe}
@@ -33,19 +178,19 @@
 \subsection{Differentieller Wirkungsquerschnitt (Rutherford-Streuung)}
 
 \subsection{Energieverlust und Bethe-Bloch-Gleichung}
-druck_ohne_folie_mbar = np.array([
-    10.7, 21.3, 33.1, 43.6, 71.2, 104.5, 137.2, 179.3, 206.1, 263.2, 320.2
-])
-spannung_ohne_folie_V = np.array([
-    11.40, 11.00, 10.60, 10.60, 9.60, 8.80, 7.60, 6.80, 6.60, 6.40, 6.40
-])
+%druck_ohne_folie_mbar = np.array([
+ %   10.7, 21.3, 33.1, 43.6, 71.2, 104.5, 137.2, 179.3, 206.1, 263.2, 320.2
+%])
+%spannung_ohne_folie_V = np.array([
+ %   11.40, 11.00, 10.60, 10.60, 9.60, 8.80, 7.60, 6.80, 6.60, 6.40, 6.40
+%])
 
-druck_mit_folie_mbar = np.array([
-    10.2, 14.9, 34.9, 47.7, 66.4, 90.1, 125.9, 307.8, 716.4
-])
-spannung_mit_folie_V = np.array([
-    7.20, 7.00, 7.00, 6.80, 6.80, 6.60, 6.60, 6.40, 6.40,
-])
+%druck_mit_folie_mbar = np.array([
+ %   10.2, 14.9, 34.9, 47.7, 66.4, 90.1, 125.9, 307.8, 716.4
+%])
+%spannung_mit_folie_V = np.array([
+%    7.20, 7.00, 7.00, 6.80, 6.80, 6.60, 6.60, 6.40, 6.40,
+%])
 
 \newpage
 \section{Diskussion}
@@ -54,9 +199,27 @@ spannung_mit_folie_V = np.array([
 \newpage
 
 \begin{thebibliography}{9}
+
+\bibitem{demtroeder}
+Demtröder, Wolfgang: \emph{Experimentalphysik 4: Kern-, Teilchen- und Astrophysik}, Springer Spektrum.
+
+\bibitem{wutz}
+Jousten, Karl (Hrsg.): \emph{Wutz Handbuch Vakuumtechnik}, Springer Vieweg.
+
+\bibitem{kolanoski}
+Kolanoski, Hermann / Wermes, Norbert: \emph{Teilchendetektoren: Grundlagen und Anwendungen}, Springer Spektrum, 2015.
+
+\bibitem{povh}
+Povh, Bogdan u.a.: \emph{Teilchen und Kerne: Eine Einführung in die physikalischen Konzepte}, Springer-Lehrbuch.
+
 \bibitem{tudoV16}
-TU Dortmund, Fakultät Physik: \emph{Versuchsanleitung V16}, 2026.
+TU Dortmund, Fakultät Physik: \emph{Versuchsanleitung V16: Rutherford Streuexperiment}, 2026.
+
+\bibitem{medphyswiki}
+Medizinphysik-Wiki: \emph{Halbleiter}, \url{https://medizinphysik.wiki/glossar/halbleiter/}, abgerufen am 08.11.2026.
+
+\bibitem{nndc}
+National Nuclear Data Center (NNDC): \emph{NuDat 3 - Decay Radiation}, \url{https://www.nndc.bnl.gov/nudat3/replotdec.jsp}, abgerufen am 09.11.2026.
+
 \end{thebibliography}
-
-
 \end{document}
