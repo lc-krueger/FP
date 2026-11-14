@@ -270,6 +270,7 @@ und wurde wie die Kurve mit \textit{SciPy} berechnet.\\
 Es wurde für nachfolgende Messungen ein Winkel von $\theta = 1{,}9^\circ$ als kalibrierter Nullwinkel gewählt.
 
 \subsection{Aktivität der Americium-241-Probe}
+\label{subsec:aktivitaet}
 
 Nun wird die Aktivität der vorliegenden Americium-241-Probe experimentell bestimmt und mit dem erwarteten Wert verglichen.\\
 Die theoretische Aktivität der Probe berechnet sich anhand des radioaktiven Zerfallsgesetzes \eqref{eq:zerfallsgesetz}.
@@ -466,6 +467,7 @@ angegeben werden.
 
 
 \subsection{Rutherford-Streuung}
+\label{subsec:rutherford}
 
 Im vorliegenden Versuchsteil wird der differentielle Wirkungsquerschnitt bei Bestrahlung der Goldfolie mit Alphastrahlen bestimmt.
 Zu diesem Zweck wird unter Aussparung eines von den Ergebnissen in \autoref{subsec:kalibrier} abhängig grob gewählten Winkelbereichs die Zählrate bei einer Zahl von Winkeleinstellungen aufgenommen.  Die Tabelle\autoref{tab:rutherford-messwerte} zeigt die erhobenen Messwerte. 
@@ -523,14 +525,14 @@ Die berechneten Werte sind in \autoref{tab:rutherford_ber} aufgeführt und in \a
     \toprule
     Winkel $\theta$ / $\si{\degree}$ & $\frac{\mathrm{d}\sigma}{\mathrm{d}\Omega}_{exp}$ & Abweichung / $\%$ \\
     \midrule
-    20.00 & $3.19 \cdot 10^{3} \pm 4.23 \cdot 10^{2}\,\si{barn\per\steradian}$ & 169.53 \\
-    15.00 & $6.02 \cdot 10^{3} \pm 6.34 \cdot 10^{2}\,\si{barn\per\steradian}$ & 62.53 \\
-    14.00 & $5.31 \cdot 10^{3} \pm 5.84 \cdot 10^{2}\,\si{barn\per\steradian}$ & 8.98 \\
-    10.00 & $2.44 \cdot 10^{4} \pm 1.67 \cdot 10^{3}\,\si{barn\per\steradian}$ & 31.24 \\
-    9.00 & $3.34 \cdot 10^{4} \pm 2.51 \cdot 10^{3}\,\si{barn\per\steradian}$ & 17.90 \\
-    8.00 & $5.91 \cdot 10^{4} \pm 4.02 \cdot 10^{3}\,\si{barn\per\steradian}$ & 30.08 \\
-    7.00 & $8.02 \cdot 10^{4} \pm 5.46 \cdot 10^{3}\,\si{barn\per\steradian}$ & 3.59 \\
-    6.00 & $1.16 \cdot 10^{5} \pm 7.87 \cdot 10^{3}\,\si{barn\per\steradian}$ & -19.03 \\
+    20.00 & $3.19 \cdot 10^{3} \pm 4.23 \cdot 10^{2}\,\si{b\per\steradian}$ & 169.53 \\
+    15.00 & $6.02 \cdot 10^{3} \pm 6.34 \cdot 10^{2}\,\si{b\per\steradian}$ & 62.53 \\
+    14.00 & $5.31 \cdot 10^{3} \pm 5.84 \cdot 10^{2}\,\si{b\per\steradian}$ & 8.98 \\
+    10.00 & $2.44 \cdot 10^{4} \pm 1.67 \cdot 10^{3}\,\si{b\per\steradian}$ & 31.24 \\
+    9.00 & $3.34 \cdot 10^{4} \pm 2.51 \cdot 10^{3}\,\si{b\per\steradian}$ & 17.90 \\
+    8.00 & $5.91 \cdot 10^{4} \pm 4.02 \cdot 10^{3}\,\si{b\per\steradian}$ & 30.08 \\
+    7.00 & $8.02 \cdot 10^{4} \pm 5.46 \cdot 10^{3}\,\si{b\per\steradian}$ & 3.59 \\
+    6.00 & $1.16 \cdot 10^{5} \pm 7.87 \cdot 10^{3}\,\si{b\per\steradian}$ & -19.03 \\
     \bottomrule
     \end{tabular}
     }
@@ -576,7 +578,29 @@ berechnet.
 
 
 \newpage
+
 \section{Diskussion}
+Im Folgenden sollen Abweichungen von Theoriewerten und als bekannt vorausgesetzten Messungen, Fehlerquellen und etwaige Verbesserungsvorschläge diskutiert werden. Bei Angaben von Abweichungen wird die relative Abweichung vom theoretischen Messwert betrachtet
+\begin{equation}
+    \Delta x_{\text{rel}} = \frac{x_{\text{mess}} - x_{\text{theo}}}{x_{\text{theo}}} \cdot 100\,\%
+\end{equation}
+
+Die in Unterabschnitt 5.2 behandelte Bestimmung des Nullwinkels am Zählratenmaximum ergab einen Wert von $\theta_{\text{max}} = 1{,}9^\circ$. Diese Bestimmung hätte nach Aufnahme eines allgemeinen Trends und Fitten der Messwerte durch die gaußförmige Ausgleichskurve nochmal exakt am vorhergesagten Nullwinkel stattfinden müssen, um für nachfolgende Berechnungen eine präziser am wahren Wert liegende Zählrate zu erhalten. 
+
+In Unterabschnitt 5.3 wurde mit $A_{\text{exp}} = 120{,}0\,\text{kBq}$ eine Abweichung von $-61{,}72\,\%$ vom Theoriewert für die Aktivität erzielt. Zwar wurde für den Raumwinkelausschnitt eine vereinfachte Formel verwendet, diese geometrische Näherung ist aufgrund der Abmessungen des Versuchsaufbaus jedoch gerechtfertigt. Wie bereits erwähnt, wurde auch hier nicht die Messung für den idealen Nullwinkel verwendet. Weitere Fehlerquellen sind die Totzeit des Detektors sowie die Einschränkungen durch die Kollimatorblenden, die in der theoretischen Berechnung unberücksichtigt bleiben.
+
+In Unterabschnitt 5.4 wurde der Wert der Foliendicke auf $\Delta x = 4{,}87\,\mu\text{m}$ und damit mit einer Abweichung von $143{,}5\,\%$ vom realen Wert von $d_{\text{real,Au}} = 2\,\mu\text{m}$ bestimmt. Als Fehlerquelle könnte hier das möglicherweise zu groß gewählte Messintervall genannt werden. Das Schneiden beider Kurven lässt sich physikalisch nicht plausibel erklären, da stets angenommen werden muss, dass die Teilchen in der Folie Energie verlieren. Dieses Phänomen ist vielmehr darauf zurückzuführen, dass die stark abgeschwächten Signale bei hohen Drücken Hintergrundrauschen verschwinden. Zu Beginn der Messung wurde die Diskriminatorschwelle manuell auf den Wert 6 eingestellt, um das Grundrauschen herauszufiltern. Da beide Messreihen auf einem Plateau von $6{,}4\,\text{V}$ enden, entspricht dieser Spannungswert anzunehmend dieser Schwelle. Das Oszilloskop zeigt ab diesem Punkt keinen echten Energieverlust der Teilchen mehr an, sondern wird durch den Diskriminator limitiert. Ein möglicher Lösungsansatz für diesen Versuchsteil wäre es gewesen, die Diskriminatorschwelle ab dem Erreichen dieses Plateaus vorsichtig herunterzufahren, um auch noch geringere Restenergien erfassen zu können, auch wenn sich das Signal dann schwerer vom Rauschen isolieren lässt. Feiner eingestellte Drücke und gemessene Spannungswerte wären der Genauigkeit ebenfalls zuträglich gewesen. 
+
+Die in Unterabschnitt 5.5 entstandenen Abweichungen sind in Tabelle \ref{tab:rutherford_ber} einzusehen. Der Verlauf der gemessenen Werte entspricht in erster Näherung den durch die Rutherford'sche Streuformel vorhergesagten Werten. Die teils beträchtlichen Abweichungen, insbesondere bei den beiden größten Winkeleinstellungen, könnten durch die zu geringe aufgenommene Teilchenzahl und den damit zu großen statistischen Fehler begründet sein, da die Ereignisrate bei großen Winkeln extrem steil abfällt. Hier ist das zeitliche Limit bei manuellen Messungen über entsprechende Messzeiten zu sehen. Eine weitere Fehlerquelle ist die starke Sensitivität der Rutherford-Formel bezüglich des Winkels. Wegen des steilen Abfalls der $\frac{1}{\sin^4\left(\frac{\Theta}{2}\right)}$ Funktion führen schon minimale systematische Abweichungen in der Nullwinkelkalibrierung oder die endliche Breite des Teilchenstrahls zu Abweichungen von der Theorie.
+
+Zusammenfassend lässt sich für die Versuchsdurchführung festhalten, dass eine automatisierte Messwerterfassung über längere Messzeiten und in feineren Winkelintervallen vorteilhaft gewesen wäre. Trotzdem konnten im Versuch die Rutherford-Streuung am Atomkern bis hin zum Energieverlust gemäß der Bethe-Bloch-Gleichung qualitativ und in weiten Teilen quantitativ gut anhand der Messdaten gezeigt werden.
+
+
+
+
+
+
+
 
 \newpage
 
