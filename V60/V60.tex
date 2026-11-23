@@ -24,34 +24,267 @@
 
 \section{Durchführung}
 
+In der Versuchsdurchführung werden die Betriebsparameter des Diodenlasers über die Potentiometer am Controller sowie die Detektions- und Oszilloskopeinstellungen schrittweise so abgestimmt, dass die jeweiligen Laserzustände und Absorptionsspektren sauber aufgenommen werden können. Während der gesamten Arbeit mit dem eingeschalteten Laser wird eine Laserschutzbrille getragen und der Raum abgedunkelt.
+
+Zu Beginn werden die Temperaturregelung der Laserdiode sowie die Heizung der Rubidium-Dampfzelle eingeschaltet. Nach Erreichen des thermischen Gleichgewichts wird die Monitor-Spannung $U_T$ am Controller abgelesen, um die Betriebstemperatur des Lasers aufzunehmen.
+Anschließend wird der Diodenstrom ausgehend von einem niedrigen Wert schrittweise erhöht, während der austretende Strahl auf einer Karte beobachtet wird. Dabei wird der Übergang vom diffusen, schwachen Leuchten (LED-Betrieb) zum Auftreten eines hellen, klar begrenzten Laserpunkts mit Lasergranulation (Laserbetrieb) abgewartet. Die zugehörige Monitor-Spannung $U_{\text{th}}$ an der Laserschwelle wird notiert und das Strahlprofil vom Bildschirm abfotografiert.
+
+Im kontinuierlichen Laserbetrieb oberhalb der Schwelle wird die Kamera auf die beheizte Rubidiumzelle gerichtet und diese über den Bildschirm beobachtet. Durch leichtes Justieren des Beugungsgitters mithilfe eines Inbusschlüssels sowie durch Verstellen der Piezospannung und bei Bedarf des Diodenstroms über die Potentiometer am Controller wird die Laserfrequenz variiert, bis entlang des Strahlengangs in der Zelle eine deutliche Fluoreszenzlinie sichtbar wird. Die entsprechende Piezospannung $U_{\text{Piezo}}$ wird abgelesen und die Linie fotografiert.
+
+Für die Absorptionsspektroskopie befindet sich ein Neutraldichtefilter zwischen Laser und Rubidiumzelle. Eine Photodiode hinter der Zelle wird mit dem Oszilloskop verbunden. Um einen ausreichend großen, modensprungfreien Frequenzbereich abzufahren, werden Diodenstrom und Piezospannung gleichzeitig mit einem Dreieckssignal moduliert. Durch schrittweises Nachregeln der Potentiometer für Rampenamplitude, Offset und Diodenstrom werden die Einstellungen so lange optimiert, bis alle vier Rubidium-Absorptionslinien vollständig sichtbar sind. Von dieser Einstellung werden sowohl eine Oszilloskop-Aufnahme als auch die Rohdaten als CSV-Datei gespeichert.
+
+In einem zweiten Durchgang werden das Piezo-Monitorsignal auf Channel~1 und das Photodiodensignal auf Channel~2 des Oszilloskops gelegt, sodass beide Signale synchron aufgezeichnet und erneut als Bild und CSV-Datei gesichert werden können.
+
+Abschließend wird für die Differenzmessung eine zweite Photodiode über einen $50/50$-Strahlteiler als Referenz in den Strahlengang eingebracht, deren Strahl nicht durch die Rubidiumzelle verläuft. Die Photodiode hinter der Zelle (PD~1) wird an den $(+)$-Eingang und die Referenz-Photodiode (PD~2) an den $(-)$-Eingang des Detektor-Moduls angeschlossen. Über die Balance-Potentiometer wird die Differenz beider Signale so abgeglichen, dass der linear ansteigende Untergrund möglichst flach verläuft. Das resultierende Absorptionsspektrum mit den vier Absorptionsminima wird erneut als Oszilloskop-Aufnahme und CSV-Datensatz gespeichert.
+
 \section{Auswertung}
 
+Die Auswertung, die Fits sowie die Erstellung der Diagramme wurden mit Python mit den Bibliotheken \texttt{NumPy}, \texttt{SciPy} und \texttt{Matplotlib} durchgeführt. Die Unsicherheiten aller abgeleiteten Größen wurden mithilfe der Gauß'schen Fehlerfortpflanzung berechnet
+\begin{equation*}
+    \sigma_f = \sqrt{\sum_{i} \left(\frac{\partial f}{\partial x_i}\,\sigma_{x_i}\right)^2}.
+\end{equation*}
+
+\subsection{Temperaturregelung des Lasers}
+\label{subsec:temperatur}
+
+Die Emissionswellenlänge einer Laserdiode ist stark temperaturabhängig. Am Temperatur-Monitor wurde eine Spannung von $U_T = \SI{1.97}{\volt}$ abgelesen. Durch lineare Interpolation 
+\begin{equation*}
+T_{\text{Laser}} = T_1 + \frac{U_T - U_1}{U_2 - U_1}\,(T_2 - T_1)
+= \SI{35}{\degreeCelsius} + \frac{\SI{1.97}{\volt} - \SI{1.9756}{\volt}}{\SI{1.9269}{\volt} - \SI{1.9756}{\volt}}\,(\SI{36}{\degreeCelsius} - \SI{35}{\degreeCelsius}) \approx \SI{35.11}{\degreeCelsius}
+\end{equation*}
+erhalten wir eine Betriebstemperatur von $T_{\text{Laser}} \approx \SI{35.1}{\degreeCelsius}$. Die Rubidiumzelle wurde zur Erhöhung der Dampfdichte und damit des Signals auf etwa $\SI{50}{\degreeCelsius}$ beheizt.
+
+\subsection{Bestimmung der Laserschwelle}
+
+Zur Bestimmung der Laserschwelle wurde der Strom der Laserdiode schrittweise erhöht und das Strahlprofil beobachtet. Unterhalb der Schwelle emittiert die Diode lediglich schwache, spontane Strahlung mit einem breiten, diffusen Profil (LED-Betrieb). Bei einer Monitor-Spannung von $U_{\text{th}} = \SI{0.19}{\volt}$ setzt die stimulierte Emission ein und die Intensität steigt sprunghaft an und es bildet sich ein klar begrenzter Laserpunkt mit Lasergranulation (Laserbetrieb, siehe Abbildung~\ref{fig:lasermodus}).
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.65\textwidth]{bilder/lasermodus.jpg}
+    \caption{Aufnahme des gebündelten Strahlprofils auf der Betrachtungskarte oberhalb der Laserschwelle im Laserbetrieb.}
+    \label{fig:lasermodus}
+\end{figure}
+
+\subsection{Rubidium-Fluoreszenz}
+
+Um den Laser auf die Rubidium-$D_2$-Linie bei $\lambda = \SI{780.241}{\nano\meter}$\footnote{P. Siddons et al., J. Phys. B \textbf{41}, 155004 (2008), Kap.~2.4.} abzustimmen, wurde die Piezospannung am Beugungsgitter im kontinuierlichen Laserbetrieb variiert, während die beheizte Rubidiumzelle beobachtet wurde. Bei einer eingestellten Spannung von $U_{\text{Piezo}} = \SI{6.67}{\volt}$ trat eine deutliche, leicht flackernde Fluoreszenzlinie entlang des Laserstrahls in der Zelle auf (Abbildung~\ref{fig:rb_linie}). Dies zeigt, dass die Laserfrequenz resonant mit einem der atomaren Übergänge des Rubidiums ist und die angeregten Atome das absorbierte Licht spontan in alle Raumrichtungen abstrahlen.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.72\textwidth]{bilder/rb-Linie.jpg}
+    \caption{Aufnahme der Rubidiumlinie in der Dampfzelle}
+    \label{fig:rb_linie}
+\end{figure}
+
+\subsection{Absorptionsspektrum (1 PD)}
+
+Durch gleichzeitiges Modulieren von Diodenstrom und Piezospannung lässt sich ein modensprungfreier Frequenzbereich abfahren, der alle vier Absorptionslinien des Rubidiums abdeckt. Abbildung~\ref{fig:1pd_oszi} zeigt die zugehörige Aufnahme direkt vom Oszilloskop, während in Abbildung~\ref{fig:1pd_plot} die aus den Messdaten extrahierte steigende Flanke im Bereich $t \in [\SI{0}{\milli\second}, \SI{35}{\milli\second}]$ dargestellt ist.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[angle=90, width=0.65\textwidth]{bilder/F0017TEK.jpg}
+    \caption{Oszilloskop-Aufnahme des Rubidium-Absorptionsspektrums mit einer Photodiode}
+    \label{fig:1pd_oszi}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{1PD_spektrum.pdf}
+    \caption{Aus den Messdaten geplotteter Ausschnitt des 1-PD-Absorptionsspektrums mit Zuordnung der vier Rubidium-Übergänge.}
+    \label{fig:1pd_plot}
+\end{figure}
+Es lassen sich alle vier charakteristischen Übergänge der Isotope $^{85}\text{Rb}$ mit natürlicher Häufigkeit von $\SI{72.17}{\percent}$ und $^{87}\text{Rb}$ mit $\SI{27.83}{\percent}$\footnote{P. Siddons, C. S. Adams, C. Ge und I. G. Hughes, \textit{Absolute absorption on rubidium D lines: comparison between theory and experiment}, J. Phys. B: At. Mol. Opt. Phys. \textbf{41}, 155004 (2008), Appendix~A.} eindeutig darstellen:
+\begin{itemize}
+    \item $^{87}\text{Rb}$ b bei $t = \SI{7.04}{\milli\second}$ ($\approx \SI{6.36}{\milli\volt}$)
+    \item $^{85}\text{Rb}$ b bei $t = \SI{9.96}{\milli\second}$ ($\approx \SI{12.47}{\milli\volt}$)
+    \item $^{85}\text{Rb}$ a bei $t = \SI{16.36}{\milli\second}$ ($\approx \SI{4.90}{\milli\volt}$)
+    \item $^{87}\text{Rb}$ a bei $t = \SI{22.16}{\milli\second}$ ($\approx \SI{1.75}{\milli\volt}$)
+\end{itemize}
+
+Die Zuordnung folgt zum einen aus dem charakteristischen Intensitätsmuster, und zum anderen aus den relativen Zeitabständen der Linien. Für die Grundzustandsaufspaltungen ergeben sich Zeitdifferenzen von $\Delta t(^{85}\text{Rb}) = \SI{6.40}{\milli\second}$ zwischen 85b und 85a, sowie $\Delta t(^{87}\text{Rb}) = \SI{15.12}{\milli\second}$ zwischen 87b und 87a. Das Verhältnis beträgt
+\begin{equation*}
+    \frac{\Delta t(^{87}\text{Rb})}{\Delta t(^{85}\text{Rb})} = \frac{\SI{15.12}{\milli\second}}{\SI{6.40}{\milli\second}} \approx \num{2.36},
+\end{equation*}.
+
+\subsection{Absorptionsspektrum (1 PD) mit Piezo-Monitor}
+
+In einer weiteren Messung mit höherem Photodioden Gain wurden beide Kanäle des Oszilloskops gleichzeitig aufgezeichnet. Abbildung~\ref{fig:1pd_ch12_oszi} zeigt die direkte Oszilloskop-Aufnahme, Abbildung~\ref{fig:1pd_ch12_plot} die zugehörige Auswertung aus den CSV-Daten. Da der Trigger-Zeitpunkt des Oszilloskops willkürlich ist, wurde der Zeitnullpunkt im Plot um $+\SI{10}{\milli\second}$ verschoben, sodass $t = \SI{0}{\milli\second}$ am linken Rand liegt und alle vier Absorptionslinien im positiven Zeitbereich dargestellt werden können.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[angle=90, width=0.65\textwidth]{bilder/F0018TEK.jpg}
+    \caption{Oszilloskop-Aufnahme des 1-PD-Absorptionsspektrums zusammen mit dem Piezo-Monitorsignal.}
+    \label{fig:1pd_ch12_oszi}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{1PD_spektrum_ch1_ch2.pdf}
+    \caption{Geplottetes 1-PD-Absorptionsspektrum CH2, und zugehörige Piezo-Dreiecksrampe CH1.}
+    \label{fig:1pd_ch12_plot}
+\end{figure}
+
+Channel 1 zeigt das $\SI{10}{\hertz}$-Dreieckssignal des Piezo Monitor Output, linear ansteigend von $\approx \SI{-1.0}{\volt}$ bis $\approx \SI{-0.2}{\volt}$. Channel 2 gibt die negative Ausgangsspannung der Photodiode hinter der Rubidiumzelle wieder, wobei die strombedingte Leistungszunahme den linear abfallenden Untergrund erzeugt und die vier nach oben gerichteten Peaks den Rubidium-Absorptionslinien entsprechen.
+Auf der dargestellten steigenden Flanke der Piezorampe durchläuft der Laser die Frequenzen in umgekehrter Richtung, sodass die vier Linien von links nach rechts in der Reihenfolge $^{87}\text{Rb}$~a, $^{85}\text{Rb}$~a, $^{85}\text{Rb}$~b und $^{87}\text{Rb}$~b erscheinen:
+\begin{itemize}
+    \item $^{87}\text{Rb}$ a bei $t = \SI{9.36}{\milli\second}$ ($\approx \SI{16.09}{\milli\volt}$)
+    \item $^{85}\text{Rb}$ a bei $t = \SI{15.20}{\milli\second}$ ($\approx \SI{49.02}{\milli\volt}$)
+    \item $^{85}\text{Rb}$ b bei $t = \SI{22.28}{\milli\second}$ ($\approx \SI{129.74}{\milli\volt}$)
+    \item $^{87}\text{Rb}$ b bei $t = \SI{25.04}{\milli\second}$ ($\approx \SI{62.43}{\milli\volt}$)
+\end{itemize}
+
+Für die Grundzustandsaufspaltungen ergeben sich damit Zeitdifferenzen von $\Delta t(^{85}\text{Rb}) = \SI{7.08}{\milli\second}$ und $\Delta t(^{87}\text{Rb}) = \SI{15.68}{\milli\second}$. Das Verhältnis beträgt
+\begin{equation*}
+    \frac{\Delta t(^{87}\text{Rb})}{\Delta t(^{85}\text{Rb})} = \frac{\SI{15.68}{\milli\second}}{\SI{7.08}{\milli\second}} \approx \num{2.21}
+\end{equation*}.
+
+\subsection{Absorptionsspektrum (2 PD)}
+
+Um den durch die Strommodulation hervorgerufenen Untergrund zu entfernen, wurde im letzten Versuchsteil eine zweite Photodiode über einen $50/50$-Strahlteiler in den Strahlengang eingebracht. Durch Subtraktion beider Photodiodensignale entsteht ein nahezu konstanter Untergrund bei $\approx \SI{331}{\milli\volt}$ mit vier deutlichen Absorptionsminima. Abbildung~\ref{fig:2pd_oszi} zeigt die direkte Oszilloskop-Aufnahme dieser Messung.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[angle=90, width=0.65\textwidth]{bilder/F0019TEK.jpg}
+    \caption{Oszilloskop-Aufnahme des Rubidium Absorptionsspektrums mit zwei Photodioden (Differenzmessung).}
+    \label{fig:2pd_oszi}
+\end{figure}
+
+\subsubsection{Kalibrierung der Frequenzachse}
+
+Das Oszilloskop zeichnet die Differenzspannung der beiden Photodioden zunächst als Funktion der Zeit $t$ auf. Um die $x$-Achse von einer willkürlichen Zeitachse (in $\si{\milli\second}$) in eine physikalisch aussagekräftige Frequenzverstimmung $\Delta\nu$ (in $\si{\giga\hertz}$) umzurechnen, werden die vier Rubidium-Absorptionslinien selbst als Referenzmaßstab genutzt. Die zugehörigen Literaturfrequenzen der vier $D_2$-Linien, bezogen auf den gemeinsamen Schwerpunkt bei $\SI{384230426.6}{\mega\hertz}$ wurden jeweils über die Übergangsstärken gemittelt\footnote{Berechnet aus den tabellierten $D_2$-Übergangsfrequenzen und Übergangsstärken in P. Siddons et al., J. Phys. B \textbf{41}, 155004 (2008), Table~1(a) und Table~B1.}.
+
+Hierzu wurden zunächst die zeitlichen Positionen $t_i$ der vier Absorptionsminima bestimmt und den jeweiligen Literaturwerten $\Delta\nu_{\text{lit}, i}$ zugeordnet (siehe Tabelle~\ref{tab:kalibrierung}).
+
+\begin{table}[htbp]
+    \centering
+    \caption{Gemessene Zeitpositionen $t_i$ der vier Rubidium-$D_2$-Linien und die zugehörigen Literaturfrequenzen $\Delta\nu_{\text{lit}, i}$ für die Kalibrierung der $x$-Achse.}
+    \label{tab:kalibrierung}
+    \begin{tabular}{lcc}
+        \toprule
+        Übergang & Zeitposition $t_i$ / $\si{\milli\second}$ & Literaturwert $\Delta\nu_{\text{lit}, i}$ / $\si{\giga\hertz}$ \\
+        \midrule
+        $^{87}\text{Rb}$ a & $\num{-13.343 \pm 0.010}$ & $\num{+4.153}$ \\
+        $^{85}\text{Rb}$ a & $\num{-7.208 \pm 0.003}$  & $\num{+1.676}$ \\
+        $^{85}\text{Rb}$ b & $\num{-0.500 \pm 0.001}$  & $\num{-1.235}$ \\
+        $^{87}\text{Rb}$ b & $\num{+1.917 \pm 0.003}$  & $\num{-2.399}$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Unter der Annahme, dass sich die Laserfrequenz während des Scans linear mit der Zeit ändert, wird eine lineare Regression der Form
+\begin{equation*}
+    \Delta\nu(t) = m \cdot t + b
+    \label{eq:kalibrierung}
+\end{equation*}
+an die vier Wertepaare angepasst. Die Rechnung liefert die Parameter
+\begin{align}
+    m &= \SI{-0.4283 \pm 0.0085}{\giga\hertz\per\milli\second}, \\
+    b &= \SI{-1.500 \pm 0.065}{\giga\hertz}
+\end{align}
+mit einem Bestimmtheitsmaß von $R^2 = \num{0.9992}$. Die negative Steigung $m$ ergibt sich daraus, dass die Laserfrequenz auf der betrachteten Flanke abnimmt. Mit Gleichung~\eqref{eq:kalibrierung} lassen sich anschließend alle gemessenen Zeitpunkte direkt in die Frequenzverstimmung $\Delta\nu$ umrechnen, auf deren Grundlage der 4-fach-Gauß-Fit durchgeführt wird.
+
+\subsubsection{4-fach-Gauß-Fit}
+Zur quantitativen Auswertung der Absorptionslinien auf der kalibrierten Frequenzachse wird eine Modellfunktion bestehend aus einem linearen Restuntergrund und der Summe von vier negativen Gauß-Funktionen an die Messdaten gefittet:
+\begin{equation*}
+    U(\Delta\nu) = c_0 + c_1 \Delta\nu - \sum_{i=1}^{4} A_i \exp\!\left(-\frac{(\Delta\nu - \mu_i)^2}{2\sigma_i^2}\right).
+    \label{eq:four_gauss}
+\end{equation*}
+Dabei beschreiben $c_0$ und $c_1$ den verbleibenden linearen Untergrund, $A_i$ die jeweilige Absorptionsamplitude, $\mu_i$ die Mittenfrequenz und $\sigma_i$ die Standardabweichung der $i$-ten Linie.
+
+Die Verwendung von Gauß-Profilen ist physikalisch sinnvoll, da die Linienbreite der Rubidium-Übergänge in der auf $\SI{50}{\degreeCelsius}$ beheizten Dampfzelle maßgeblich durch die Dopplerverbreiterung bestimmt wird. Aufgrund der thermischen Bewegung der Atome entsteht ein gaußförmiges Absorptionsprofil mit einer theoretischen Halbwertsbreite von etwa $\SI{530}{\mega\hertz}$. Die natürliche Linienbreite des $D_2$-Übergangs $\Gamma / 2\pi = \SI{6.065}{\mega\hertz}$\footnote{P. Siddons et al., J. Phys. B \textbf{41}, 155004 (2008), Kap.~2.4.} ist dagegen deutlich kleiner und kann vernachlässigt werden, sodass das eigentliche Voigt-Profil durch eine Gauß-Funktion angenähert werden darf. Die gleichzeitige Anpassung aller vier Peaks in einer gemeinsamen Funktion ist zudem notwendig, da sich die beiden links liegenden Linien $^{87}\text{Rb}$~b und $^{85}\text{Rb}$~b leicht überlappen und so sauber voneinander getrennt werden können.
+Abbildung~\ref{fig:2pd_fit} zeigt das 2-PD-Spektrum zusammen mit dem angepassten 4-fach-Gauß-Fit. Die Ergebnisse des Fits stehen zusammen mit den berechneten Halbwertsbreiten ($\text{FWHM}_i = 2\sqrt{2\ln 2}\,\sigma_i$) und Peakflächen ($F_i = A_i \sigma_i \sqrt{2\pi}$) in Tabelle~\ref{tab:fit_results}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{2PD_spektrum_fit.pdf}
+    \caption{Absorptionsspektrum (2 PD) mit 4-fach-Gauß-Fit (rot) und Zuordnung der vier Rubidium-Übergänge.}
+    \label{fig:2pd_fit}
+\end{figure}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Ergebnisse des 4-fach-Gauß-Fits an das kalibrierte 2-PD-Absorptionsspektrum.}
+    \label{tab:fit_results}
+    \begin{tabular}{lcccc}
+        \toprule
+        Übergang & $\mu_i$ / $\si{\giga\hertz}$ & $A_i$ / $\si{\milli\volt}$ & $\text{FWHM}_i$ / $\si{\mega\hertz}$ & Fläche $F_i$ / $\si{\milli\volt\giga\hertz}$ \\
+        \midrule
+        $^{87}\text{Rb}$ b & $\num{-2.321 \pm 0.001}$ & $\num{45.88 \pm 0.25}$ & $\num{499.6 \pm 3.2}$ & $\num{24.40 \pm 0.14}$ \\
+        $^{85}\text{Rb}$ b & $\num{-1.286 \pm 0.001}$ & $\num{109.03 \pm 0.24}$ & $\num{530.3 \pm 1.4}$ & $\num{61.54 \pm 0.15}$ \\
+        $^{85}\text{Rb}$ a & $\num{+1.587 \pm 0.001}$ & $\num{53.15 \pm 0.24}$ & $\num{547.0 \pm 2.9}$ & $\num{30.95 \pm 0.15}$ \\
+        $^{87}\text{Rb}$ a & $\num{+4.214 \pm 0.004}$ & $\num{15.67 \pm 0.23}$ & $\num{597.0 \pm 10.8}$ & $\num{9.96 \pm 0.18}$ \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsubsection{Bestimmung des Isotopenverhältnisses}
+Da die Fläche unter den jeweiligen Peaks im Bereich geringer optischer Dichte proportional zur Teilchendichte des jeweiligen Isotops ist, lässt sich das natürliche Isotopenverhältnis von $^{85}\text{Rb}$ zu $^{87}\text{Rb}$ direkt über die Summe der zugehörigen Fitflächen bestimmen mit
+\begin{align}
+    F(^{85}\text{Rb}) &= F_{85\text{b}} + F_{85\text{a}} = \SI{92.49 \pm 0.21}{\milli\volt\giga\hertz}, \\
+    F(^{87}\text{Rb}) &= F_{87\text{b}} + F_{87\text{a}} = \SI{34.36 \pm 0.23}{\milli\volt\giga\hertz}.
+\end{align}
+Daraus ergeben sich die relativen Häufigkeiten der beiden Isotope zu
+\begin{align}
+    p(^{85}\text{Rb}) &= \frac{F(^{85}\text{Rb})}{F(^{85}\text{Rb}) + F(^{87}\text{Rb})} = \SI{72.91 \pm 0.14}{\percent}, \\
+    p(^{87}\text{Rb}) &= \frac{F(^{87}\text{Rb})}{F(^{85}\text{Rb}) + F(^{87}\text{Rb})} = \SI{27.09 \pm 0.14}{\percent}.
+\end{align}
+Für das Verhältnis der beiden Isotope zueinander folgt
+\begin{equation*}
+    R = \frac{F(^{85}\text{Rb})}{F(^{87}\text{Rb})} = \num{2.692 \pm 0.019}.
+\end{equation*}
 \newpage
-
 \section{Diskussion}
+Zur Diskussion der Auswertung werden die experimentell bestimmten Größen $x_{\text{exp}}$ im Folgenden über die relative Abweichung
+\begin{equation*}
+    \delta = \frac{x_{\text{exp}} - x_{\text{lit}}}{x_{\text{lit}}} \cdot 100\,\%
+\end{equation*}
+mit den jeweiligen Literaturwerten verglichen.
+In den ersten drei Versuchsteilen wurde der Diodenlaser erfolgreich auf eine stabile Betriebstemperatur von $T_{\text{Laser}} \approx \SI{35.1}{\degreeCelsius}$ eingestellt, die Laserschwelle bei $U_{\text{th}} = \SI{0.19}{\volt}$ bestimmt und der Laser bei $U_{\text{Piezo}} = \SI{6.67}{\volt}$  auf die Rubidium-$D_2$-Linie ($\lambda = \SI{780.241}{\nano\meter}$) abgestimmt. Die deutliche Fluoreszenzlinie in der auf $\SI{50}{\degreeCelsius}$ beheizten Dampfzelle bestätigte dabei direkt, dass ein atomarer Übergang getroffen wurde.
 
+Im ersten 1-PD-Absorptionsspektrum ergab sich für das Verhältnis der zeitlichen Grundzustandsaufspaltungen ein Wert von
+\[
+    \frac{\Delta t(^{87}\text{Rb})}{\Delta t(^{85}\text{Rb})} \approx \num{2.36}.
+\]
+Verglichen mit dem theoretischen Verhältnis der Hyperfeinaufspaltungen von $\SI{6.835}{\giga\hertz} / \SI{3.036}{\giga\hertz} \approx \num{2.25}$\footnote{P. Siddons et al., J. Phys. B \textbf{41}, 155004 (2008), Fig.~1.} entspricht dies einer relativen Abweichung von etwa $\SI{4.9}{\percent}$. Diese Differenz lässt sich vor allem durch die leichte Nichtlinearität des Piezoelements sowie den strombedingten Untergrund erklären.
+
+In der zweiten 1-PD-Messung mit höherem Photodioden Gain und gleichzeitig aufgezeichnetem Piezo-Monitor verbesserte sich das Signal-Rausch-Verhältnis. Das gemessene Verhältnis von $\num{2.21}$ weicht nur noch um rund $\SI{1.8}{\percent}$ vom Literaturwert $\num{2.25}$ ab.
+
+Im letzten Versuchsteil konnte der lineare Untergrund durch den 2-PD-Aufbau weitgehend entfernt werden. Die lineare Kalibrierung der Frequenzachse lieferte mit $R^2 = \num{0.9992}$ eine sehr gute Anpassung. Die aus dem 4-fach-Gauß-Fit bestimmten Halbwertsbreiten liegen zwischen $\SI{499.6 \pm 3.2}{\mega\hertz}$  für $^{87}\text{Rb}$~b und $\SI{597.0 \pm 10.8}{\mega\hertz}$ für $^{87}\text{Rb}$~a und stimmen damit gut mit der theoretisch erwarteten Dopplerverbreiterung von etwa $\SI{530}{\mega\hertz}$ bei $\SI{50}{\degreeCelsius}$ überein. Die Abweichungen liegen zwischen $\SI{-5.7}{\percent}$ und $\SI{+12.6}{\percent}$. Die leichten Abweichungen sowie die geringe Zunahme der Breiten über den Scanbereich lassen sich ebenfalls durch die leichte Nichtlinearität des Piezos erklären, die die Linien leicht verbreitert.
+
+Für die relativen Isotopenhäufigkeiten wurden aus den Fitflächen
+\[
+    p(^{85}\text{Rb}) = \SI{72.91 \pm 0.14}{\percent} \quad \text{und} \quad p(^{87}\text{Rb}) = \SI{27.09 \pm 0.14}{\percent}
+\]
+bestimmt. Im Vergleich zu den Literaturwerten von $\SI{72.17}{\percent}$ für $^{85}\text{Rb}$ und $\SI{27.83}{\percent}$ für $^{87}\text{Rb}$\footnote{P. Siddons et al., J. Phys. B \textbf{41}, 155004 (2008), Appendix~A.} entspricht dies einer relativen Abweichung von $\SI{+1.0}{\percent}$ bzw. $\SI{-2.7}{\percent}$. Für das Isotopenverhältnis ergibt sich experimentell
+\[
+    R_{\text{exp}} = \num{2.692 \pm 0.019}
+\]
+gegenüber dem Literaturwert $R_{\text{lit}} = \num{72.17} / \num{27.83} \approx \num{2.593}$, woraus eine relative Abweichung von
+\[
+    \frac{R_{\text{exp}} - R_{\text{lit}}}{R_{\text{lit}}} \approx \SI{3.8}{\percent}
+\]
+folgt. Da die Abweichung größer ist als die rein statistische Fitunsicherheit, dominieren hier die systematischen Fehlerquellen.
+
+Abschließend lässt sich sagen, dass neben der grundlegenden Funktionsweise eines Diodenlasers auch die Absorptionsspektroskopie an Rubidium sowie die Bestimmung des natürlichen Isotopenverhältnisses quantitativ sehr gut gezeigt werden konnten. 
 \newpage
 
 \begin{thebibliography}{9}
 
+\bibitem{siddons2008}
+P.~Siddons, C.~S.~Adams, C.~Ge und I.~G.~Hughes,
+\textit{Absolute absorption on rubidium D lines: comparison between theory and experiment},
+Journal of Physics B: Atomic, Molecular and Optical Physics \textbf{41}, 155004 (2008),
+DOI: \texttt{10.1088/0953-4075/41/15/155004}.
+
+\bibitem{anleitung}
+TU Dortmund, Fakultät Physik,
+\textit{Versuchsanleitung V60: Diodenlaser},
+Fortgeschrittenenpraktikum, Dortmund.
+
+\bibitem{teachspin}
+TeachSpin Inc.,
+\textit{Diode Laser Spectroscopy -- Manual},
+Buffalo, NY, USA.
 
 \end{thebibliography}
-
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\newpage
-
-\section{Diskussion}
