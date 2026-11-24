@@ -11,7 +11,7 @@ all: V60.pdf
 2PD_spektrum_fit.pdf: aufgabe5.py
 	python3 aufgabe5.py
 
-V60.pdf: V60.tex bilder/lasermodus.jpg bilder/rb-Linie.jpg bilder/F0017TEK.jpg bilder/F0018TEK.jpg bilder/F0019TEK.jpg 1PD_spektrum.pdf 1PD_spektrum_ch1_ch2.pdf 2PD_spektrum_fit.pdf
+V60.pdf: V60.tex bilder/lasermodus.jpg bilder/rb-Linie.jpg bilder/F0017TEK.jpg bilder/F0018TEK.jpg bilder/F0019TEK.jpg 2PD_spektrum_fit.pdf
 	lualatex V60.tex
 	lualatex V60.tex
 
