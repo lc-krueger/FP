@@ -18,9 +18,388 @@
 
 \section{Zielsetzung}
 
+Der vorliegende Versuch hat den Diodenlaser zum Thema, welcher als Halbleiterlaser Licht durch stimulierte Emission innerhalb einer Halbleiterstruktur erzeugt.
+Allgemein zeichnet sich Laserlicht durch eine hohe Lichtintensität bei eng begrenzter Frequenzbandbreite, hoher Kohärenz und gleicher Polarisation aus, was 
+es neben vielen anderen Anwendungen bestens zur Untersuchung optischer atomarer Übergänge qualifiziert.
+Einige Eigenschaften des im Diodenlaser erzeugten Laserlichtes, sowie die Möglichkeiten zu dessen Manipulation werden nun im nachfolgend besprochenen Versuchsaufbau 
+sichtbar gemacht. Als exemplarische physikalische Anwendung wird mit dessen Hilfe das Transmissionsspektrum von Rubidiumdampf aufgenommen.
+
+
+
+
+
+
 \section{Theorie}
 
+\subsection{Relevante Grundlagen aus der Halbleiterphysik}
+
+\subsubsection{Valenz- und Leitungsband in Halbleitern und Dotierung}
+
+Für ein grundlegendes Verständnis der Funktionsweise und der Eigenschaften des Diodenlasers muss die Physik der Halbleiter und deren elektronische
+Bandstruktur betrachtet werden.
+Im Kontrast zu elektrischen Leitern existieren in reinen Halbleitern im Grundzustand kaum freie Ladungsträger zum eletrischen Stromstransport.
+Valenz- und Leitungsband sind jedoch durch eine im Vergleich zu Isolatoren kleine Bandlücke voneinander getrennt, sodass bereits eine geringe Energiezufuhr in Form von Wärme, Licht oder elektrischer Spannung zur einer Erhöhung 
+der elektrischen Leitfähigkeit dieser Materialien führt.\cite{grundwissenHalbleiter}
+Diese Tasache liegt bei der Lokalisation der Fermienergie des Halbleiters begründet, also die maximale Elektronenenergie im Material am absoluten Nullpunkt, die hier zwischen Valenz- und Leitungsband liegt.
+\autoref{fig:bandstruktur} stellt die Bandstrukturen von Leitern, Halbleitern und Isolatoren schematisch dar.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/band-structure.png}
+    \caption{Schematische Bandstruktur eines Leiters, Halbleiters und Dielektrikums \cite{suetterlin2020}.}
+    \label{fig:bandstruktur}
+\end{figure}
+
+Die Dotierung bezeichnet die Gesamtheit aller Verfahren, mit deren Hilfe bestimmte Fremdatome in den Halbleiter eingebracht werden, um gezielt dessen elektrische Leitfähigkeit
+zu beeinflussen. So werden bei der p-Dotierung Fremdatome eines Elementes mit einer im Vergleich geringeren Anzahl von Valenzelektronen, typischerweise also Elemente
+niedrigerer Hauptgruppennummer, in den Halbleiter eingebracht. Es entstehen ein sogennantes "Loch", die sich bei Anlegen einer Spannung wie positive Ladungsträger verhalten.
+Energetisch liegt dieses knapp oberhalb des Valenzbandes, sodass durch geringe Anregung eine raumfeste negative Ladung im Gitter, sowie eine bewegliche Elektronenfehlstelle entsteht.
+Im umgekerten Fall werden bei der n-Dotierung Elemente mit vergleichsweise größerer Zahl von Valenzelektronen in den Halbleiter eingebracht, hier werden die Ladungsträger
+schlicht als Elektronen bezeichnet. Diese liegen knapp unterhalb des Leitungsbandes und können durch geringe Energiezufuhr ins Leitungsband überführt werden, wo sie 
+für den elektrischen Stromtransport zur verfügung stehen. Dementsprechend entsteht eine ortsfeste positive Ladung im Kristallgitter.
+
+\subsubsection{pn- Übergang und Dioden}
+
+Beim Zusammenbringen unterschiedlich dotierter Halbleiter kommt es zu einer Wanderung von Elektronen aus der n-dotierten in die p-dotierte Schicht und umgekehrt zur
+Migration von Löchern in die n-dotierte Schicht.
+In diesem als pn- Übergang bezeichneten Bereich entsteht eine Raumladungszone mit einem elektrischen Feld, welches nun eine polungsabhängige Durchlass- oder Sperrrichtung bei Anlegen einer Spannung
+konstituiert. In \autoref{fig:pn-uebergang} ist dieser Vorgang skizziert dargestellt.
+Ein so konstruiertes elektronisches Bauteil wird als Diode bezeichnet und bildet die Grundlage für den Diodenlaser. Bei Anlegen einer Spannung in Durchlassrichtung wird das 
+elektrische Feld in dem auch als Verarmungszone bezeichneten Raumladungszone abgebaut und elektrischer Strom fließt unter Rekombination von Elektronen aus dem Leitungs- und Löchern
+aus dem Valenzband. Die Energiedifferenz wird hierbei in Form eines Photons frei. 
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/pn-junction_energy.png}
+    \caption{Schematische Darstellung eines p-n-Übergangs \cite{boeglinPNJunction}.}
+    \label{fig:pn-uebergang}
+\end{figure}
+
+
+
+
+\subsection{Grundlagen aus Optik und Laserphysik}
+
+\subsubsection{Kohärenz}
+
+Zum Verständnis des Phänomens der Kohärenz wird Licht als die räumliche und zeitliche Ausbreitung elektromagnetischer Wellen betrachtet.
+Bei Überlagerung verschiedener elektromagnetsicher Felder kann bei einer festen Phasenbeziehung ebendieser Interferenz beobachtet werden, eine räumlich stationäre
+Feldamplitude der Überlagerung.\cite{kohaerenz}
+Die Kohärenzzeit $\tau_{\mathrm{c}}$ gibt die zeitliche Dauer dieser festen Phasenbeziehung an und steht mit der spektralen Breite $\Delta \nu$
+in der Bezehung
+
+\begin{equation*}
+\tau_{\mathrm{c}} = \frac{1}{\Delta \nu}.
+\end{equation*}
+
+Diese Reziprozität zeigt, dass für kohärentes Licht eine möglich enge Frequenzbandbreite des Lichtes erforderlich ist.
+Es lässt sich mit der Vakuumlichtgeschwindigkeit $c$ auch eine Kohärenzlänge
+
+\begin{equation*}
+l_{\mathrm{c}} = c\,\tau_{\mathrm{c}}
+\end{equation*}
+
+definieren, die die Strecke dieser festen Phasenbeziehung angibt.
+Als \textit{Kohärenz 1. Ordnung}
+
+\begin{equation*}
+g^{(1)}(\tau)
+=
+\frac{\left\langle E^*(t)\,E(t+\tau)\right\rangle}
+{\left\langle E^*(t)\,E(t)\right\rangle}
+\end{equation*}
+
+wird die Korrelation des elektromagnetischen Feldes zu den Zeitpunkten $t$ und $t+\tau$ verstanden. $g^{(1)}(\tau)$ nimmt Werte zwischen $0$ und $1$ an, wobei
+bei $1$ vollständige und bei $0$ keine Kohärenz des elektromagnetischen Feldes vorliegt.(Vgl. \cite{steck_coherence})
+Allgemein zeichnet sich Laserlicht durch eine hohe Kohärenz 1. Ordnung aus, während das Licht von Glühlampen aufgrund der thermischen Entstehung der Strahlung
+eine weitaus geringere Kohärenz aufweist.
+Die \textit{Kohärenz 2. Ordnung} 
+
+\begin{equation*}
+g^{(2)}(\tau)
+=
+\frac{\left\langle I(t)\,I(t+\tau)\right\rangle}
+{\left\langle I(t)\right\rangle^2}
+\end{equation*}
+
+
+betrachtet demgegenüber die Korrelation der Intensität $I$ zu verschiedenen Zeitpunkten, also, ob die Photonen des Lichtes gehäuft oder einzeln in einem Raumpunkt auftreffen.
+Hier weist monochromatisches Licht als ideales Laserlicht einen Wert von $1$ auf, während weniger kohärentes Licht größerere Werte besitzt.(Vgl. \cite{steck_coherence})
+
+
+
+
+
+
+\subsubsection{Photonen im Halbleiter, Laserlicht durch stimulierte Emission und Bestzungsinversion}
+
+Für die Erzeugung von Laserlicht in einer Laserdiode müssen drei Wechselwirkungen von Photonen und Elektronen im Halbleiter betrachtet werden.
+Bei der \textit{spontanen Emission} kommt es zur selbstständigen Rekombination eines Elektron-Loch-Paares  und damit Aussendung eines Photons, dessen
+Energie näherungsweise der Bandlücke entspricht. Dabei ist die Richtung der Emission, die Polaristation und Phase statistisch verteilt.
+Umgekehrt kann ein Photon ebenso von einem Elektron im Valenzband aufgenommen und damit ein Elektron-Loch-Paar erzeugt werden, was als \textit{Absoption} bezeichnet wird.
+Beide Prozesse finden mit derselben Wahrscheinlichkeit im Halbleiter statt.
+Der für die Erzeugung des Laserlichtes verantwortliche Prozess ist die \textit{stimulierte Emission}, bei der ein einfallendes Photon ein Elektron-Loch-Paar
+zur Rekombination und zum Aussenden eines Photons identischer Richtung, Phase und Polarisation führt. So kommt es durch positive Rückkopplung zu einem
+starken Intensitätsanstieg kohärenten Lichtes, was als Laserlicht bezeichnet wird
+In \autoref{fig:em_ab_stim} sind diese Prozesse gegenübergestellt.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/em_ab_stim.png}
+    \caption{Spontane Emission, Absorption und stimulierte Emission im halbleiter\cite{deMatos_absorption}.}
+    \label{fig:em_ab_stim}
+\end{figure}
+
+Im thermischen Gleichgewicht übersteigt die Anzahl der Elektronen in niedrigeren die der Elektronen in angeregten Zuständen, hierdurch überwiegt der Prozess der Absorption
+dem der stimulierten Emission. Ein Verschieben des Gleichgewichtes zu angregten Zuständen lässt sich mithilfe von Energiezufuhr,
+im Falle des Diodenlasers Anlegen eines Pumpstromes, durch den Elektronen und Löcher in den Halbleiter injiziert werden, erreichen.
+Allerdings muss für die Dominanz der stimulierten Emission ebenfalls ein Zustand der \textit{Besetzungsinversion} vorliegen:
+Hiermit ist ein Überwiegen angeregter Elektronen gegenüber ebendieser im Grundzustand gemeint, welche in einem simplen Zweiniveausystem wie bisher präsentiert nicht erreicht 
+werden kann. Sei hierzu angenommen, dass ein angeregter Energiezustand $E_2 > E_1$ höher besetzt sei. Aufgrund gleicher Wahrscheinlichkeit von spontaner Emissiom
+und Absorption würde erstere alsbald zu einer Rückkehr zum Gleichgewicht zwischen beiden Niveaus führen, was eine gewünschte kaskadenartigen Zunahme der stimulierten
+Emission im Halbleiter unmöglich macht. Erst und mindestens ein Dreiniveausystem macht eine dauerhafte Bestzungsinversion realisierbar.
+Hier existiert ein weiteres angregtes Niveau $E_3$ oberhalb des für die stimulierte Emission zur Verfügung stehenden Energieniveaus $E_2$, in welches aus dem Grundzustand $E_1$
+durch den Pumpstrom angeregt wird und aus dem Elektronen zügig strahlungslos in das als metastabil bezeichnete Niveau $E_2$ relaxieren. Ausreichende Pumpströme, 
+bezeichnet als Schwellenstrom $I_{\mathrm{th}}$, können so zu einer Besetzungsinversion mit Besetzungszahlen $N_2 > N_1$ zwischen den Energieniveaus $E_2$ und $E_1$ führen.
+In einem Vierniveausystem liegt hingegen stets Bestzungsinversion mit $N_1 > N_2$ vor, hier existiert unterhalb des Niveaus $E_1$ noch ein weiteres Niveau $E_0$, aus 
+dem in das Niveau $E_4$ gepumpt wird.\cite{mitofsky_laser}
+In \autoref{fig:popinv} sind die beschriebenen Niveausysteme graphisch veranschaulicht.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/popinv.png}
+    \caption{Vergleich verschiedener Niveausysteme im Halbleiter\cite{mitofsky_laser}.}
+    \label{fig:popinv}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Der Diodenlaser}
+
+\subsubsection{Aufbau und allgemeine Funktionsweise des Diodenlasers}
+
+Als Laserdiode werden entsprechende Halleiterchips verwendet, deren Konstruktion schematisch in \autoref{fig:hl-chip} zu sehen ist.
+Über die Elektroden findet die Injektion der Ladungsträger in die Diode statt. Die p- und n-dotierte Halbleiterschichten sind hier als "cladding layers" bezeichnet. Der pn- Übergang, als "active layer" bezeichnet,
+ist der Ort, an dem die Rekombination der Ladungsträger im Halbleiter und damit auch die spontane und stimulierte Emission stattfinden. Diese Schicht dient ebenfalls 
+als optischer Wellenleiter, da sie einen höheren Brechungsindex als ihre Umgebung ausweist und so zu einem größeren Teil vollständig reflektiert wird.\cite{diodelaserphysics}
+An einem langen Ende des Chips ist eine halbdurchlässige, am anderen eine vollreflektierende Schicht aufgetragen, deren Zwischenraum als interner Resonator bezeichnet wird
+und das Erzeugen stehender elektromagnetischer Wellen im Chip ermöglicht. \autoref{fig:strahlung} zeigt die so entstehenden longitudinalen und transversalen Lasermoden.
+Beim wiederkehrenden Durchgang durch die aktive Schicht vergrößert sich die Intensität des Laserlichtes, bis es schließlich an der halbdurchlässigen Seite des Chips austritt.
+Die gesamte Diode sitzt auf einem Heat-Sink, über das die Temperatur der Diode eingestellt werden kann.
+Zu kleine Pumpströme kompensieren die optischen Verluste innerhalb der aktiven Zone zu groß, sodass die Laserschwelle nicht erreicht und die Laserdiode im LED-Modus betrieben
+wird. Dieser zeichnet sich gemäß seines Entstehungsvorgangs durch spontane Emission im Vergleich zum Laserlicht durch wesentlich geringere Intensität des Lichtes mit
+geringerer Kohärenz und relativ große spektrale Breite aus.
+Bei Erreichen des Schwellenstroms dominiert die stimulierte Emission als primärer lichterzeugender Vorgang, Ergebnis ist ein kohärenter Laserstrahl, dessen
+Intensität nun linear mit dem Laserdiodenstrom ansteigt.\cite{diodelaserphysics}
+Der primäre, aus der Diode austretende Laserstrahl ist zunächst divergent und in transversaler Richtung elliptisch geformt. Die Wellenlänge $\lambda$ des Laserlichtes entspricht ungefähr
+der Bandlücke des verwendeten Halbleitermaterials.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/hl-chip.png}
+    \caption{Schematischer Aufbau einer Laserdiode \cite{diodelaserphysics}.}
+    \label{fig:hl-chip}
+\end{figure}
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/strahlung.png}
+    \caption{Longitudinale und transversale Lasermoden im Laserdioden-Halbleiterchip \cite{diodelaserphysics}.}
+    \label{fig:strahlung}
+\end{figure}
+
+
+\subsubsection{Der Littrow-Aufbau}
+
+Der gemäß bisheriger Beschreibung aufgebaute und betriebene Laser besitzt zunächst eine für Untersuchungen von atomaren Übergängen ungünstig große
+Bandbreite von $\Delta \nu \approx 50\,\si{\mega\hertz}$.\cite{diodelaserphysics}
+Der "Littrow-Aufbau", gezeigt in \autoref{fig:littrow}, erweitert den inneren Resonator des Diodenlasers um einen Kollimator zur Erzeugung einer annähernd planaren Wellenfront und ein außerhalb des Chips liegendes Beugungsgitter, welches eine kontrollierte
+Rückkopplung in die aktive Schicht und damit eine Stabilisierung und Begrenzung der Bandbreite bis zu $\Delta \nu \approx 1\,\si{\mega\hertz}$
+ermöglicht.\cite{diodelaserphysics}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{bilder/littrow.png}
+    \caption{Schema des Littrow-Aufbaus \cite{diodelaserphysics}.}
+    \label{fig:littrow}
+\end{figure}
+
+
+
+Für die Wellenlänge $\lambda$  gilt die Gittergleichung
+
+\begin{equation*}
+    m \lambda = 2d \sin(\theta),
+\end{equation*}
+
+wobei $\theta$ dem Winkel zwischen einfallendem Laserstrahl und Normalen des Gitters bezeichnet und $m$ die Beugungsordnung darstellt, zumeist mit $m=1$.
+
+\subsubsection{Auswahl von Lasermoden und Faktoren bei der Netto-Verstärkung}
+
+Die Konstruktionsweise des Diodenlasers unter Miteinbeziehung des Littrow-Aufbaus gibt 4 Faktoren zur Einflussnahme auf die Frequenz und die Begrenzung der
+Lasermoden auf die im vorliegenden Versuch erwünschte Einzelmodenemission zu, indem innerhalb der gesamten Bandbreite einzelne Wellenlängenbereiche verstärkt werden.
+So strahlt der Diodenlaser bei der Frequenz mit der größten Netto-Verstärkung.\cite{diodelaserphysics}
+Die Faktoren zur Einstellmöglichkeit sind:
+
+\begin{enumerate}
+    \item \textbf{Verstärkung im aktiven Medium}
+
+    Die Größe der Bandlücke, abhängig vom verwendeten Halbleitermaterial und der Temperatur des Lasers erzeugen einen breiten Peak im Frequenzraum.
+    \autoref{fig:verstaerk_aktmed} zeigt diese Abhängigkeiten, wobei die Temperatur des Lasers direkt durch den Pumpstrom beeinflusst wird.
+
+
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{bilder/verstaerk_aktmed.png}
+        \caption{Die Wellenlänge des im aktiven Medium freigesetzten Laserlichts in Abhängigkeit von Temperatur und Pumpstrom.\cite{diodelaserphysics}}
+        \label{fig:verstaerk_aktmed}
+    \end{figure}
+
+    \item \textbf{Verstärkung im internen Resonator}
+
+    Die Länge $L$ des internen Resonators und der Brechnungsindex der aktiven Schicht $n$ konstituieren eine frequenzperiodische Verstärkung.
+    Der Frequenzabstand der benachbarten longitudinalen Resonatormoden wird als "Freier Spektralbereich" bezeichnet und ergibt sich gemäß
+
+    \begin{equation*}
+        \Delta \nu_{\mathrm{FSR}} = \frac{c}{2nL}.
+    \label{eq:FSR}
+    \end{equation*}
+
+    Die Frequenzverstärkungsfunktion des internen Resonators verschiebt sich abhängig von der Temperatur und dem Pumpstrom, die Temperaturabhängigkeit ergibt sich
+    aus einer Größenänderung der Bandlücke, während der Pumpstrom einerseits die Temperatur beeinflusst, als auch den Brechungsindex der aktiven Schicht und damit
+    ihre optische Länge verändert.\cite{diodelaserphysics}
+    In \autoref{fig:verstaerk_intcav} ist die Abhängigkeit der im internen Resonator stehenden Wellenlänge vom Pumpstrom grafisch aufgetragen.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{bilder/verstaerk_intcav.png}
+        \caption{Die Wellenlänge im internen Resonator in Abhängigkeit vom Pumpstrom.\cite{diodelaserphysics}}
+        \label{fig:verstaerk_intcav}
+    \end{figure}
+
+
+
+    \item \textbf{Verstärkung durch Gitterrückkopplung}
+
+    Durch die Beugung am Littrow-Gitter wird nur ein eng begrenzter Wellenlängenbereich in den Resonator rückgekoppelt und im Laser verstärkt.
+    Die spektrale Breite der Beugung 1. Ordnung am Gitter $\Delta \nu$ ist gegeben durch 
+
+    \begin{equation*}
+        N = \frac{\nu}{\Delta \nu},
+    \end{equation*}
+
+    wobei $\nu$ die Frequenz des Lichtes und $N$ die Anzahl der vom Durchmesser des kollimierten Laserstrahls erfassten Gitterpunkte sind.
+
+
+
+    \item \textbf{Verstärkung im externen Resonator}
+
+    Analog zum internen Resonator bilden sich stehende Wellen zuwischen der vollreflektierenden Seite des Halbleiterchips und hier dem Littrow-Gitter aus,
+    was die Resonatorlänge $L$ gemäß \eqref{eq:FSR} verändert. Diese kann durch die Anpassung des Abstands des gesamten Gitters durch Adjustierung dessen gesamter Position
+    oder durch das Ansteuern eines piezoelektrischen Wandlers am Gitter erreicht werden.\cite{diodelaserphysics}
+
+
+
+
+
+\end{enumerate}
+
+Die Gesamtverstärkung und damit Auswahl der Lasermode ergibt durch Überlagerung der genannten Effekte, welche in \autoref{fig:contrib} gegenübergestellt sind.
+Eine Zusammenführung der gennanten Effekte unter Auslassung des Mediumbeitrags und Zusammenfassung von Gitterbeitrag und externem Resonator ist in 
+\autoref{fig:int_vs_git_ext} aufgetragen.
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{bilder/contrib.png}
+        \caption{Beiträge der einzelnen Beiträge zur Nettoverstärkung.\cite{diodelaserphysics}}
+        \label{fig:contrib}
+\end{figure}
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{bilder/int_vs_git_ext.png}
+        \caption{Beiträge von Gitter und externem Resonator in Überlagerung mit dem Beitrag des internen Resonators .\cite{diodelaserphysics}}
+        \label{fig:int_vs_git_ext}
+\end{figure}
+
+Begründet durch die Verteilung der Maxima der einzelnen Verstärkungsbeiträge kann es zu Modensprüngen kommen, also dem abrupten Frequenzwechsel
+des Laserlichtes. \autoref{fig:modeshift} zeigt ebensolche unter Änderung des Gitterwinkels, wobei wieder der Beitrag der Gitterrückkopplung und des externen Resonators kombiniert und des
+internen Resonators dargestellt sind.
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{bilder/modeshift.png}
+        \caption{Modensprünge in Abhängigkeit von Gitterwinkeländerungen.\cite{diodelaserphysics}}
+        \label{fig:modeshift}
+\end{figure}
+
+
+
+\subsection{Hyperfeinstrukturübergänge von Rubidium und Transmissionsspektrum}
+
+Als Hyperfeinstruktur wird die Aufspaltung atomarer Energieniveaus durch Kopplung des magnetischen Kernmomentes mit dem magnetischen Moment der Hüllelektronen am Kernort
+bezeichnet. So bewirkt die Kopplung von Hüllendrehimpuls und Kernspin eine Quantisierung des Gesamtdrehimpulses und damit in einem externen magnetfeld eine diskrete Aufspaltung von 
+Absorptions- und damit Transmissionslinien.\cite{chemie_hfs}
+An- und Abregungen dieser Energieniveaus werden als Hyperfeinstrukturübergänge des Atoms bezeichnet.
+Das in diesem Versuch untersuchte Rubidium ist ein Isotopengemisch aus $^{85}\mathrm{Rb}$ und $^{87}\mathrm{Rb}$ und besitzt imsgesamt 4 opische atomare Übergänge
+im betrachteten Bereich. Die untersuchten Rubidium-Hyperfeinstrukturübergänge, sowie deren Transmissionsminima in Abhängigkeit der Energie sind in \autoref{fig:rb_trans} dargestellt.
+
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{bilder/rb_trans.png}
+        \caption{Betrachtete Hyperfeinstrukturübergänge von Rubidium.\cite{diodelaserphysics}}
+        \label{fig:rb_trans}
+\end{figure}
+
+
+
+
+
+
+
+
 \section{Versuchsaufbau}
+
+\autoref{fig:aufbau_numm} zeigt anhand eines selbstgeschossenen Fotos den verwendeten Versuchsaufbau.
+
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\textwidth]{bilder/aufbau_numm.jpg}
+        \caption{Verwendeter Versuchsaufbau.}
+        \label{fig:aufbau_numm}
+\end{figure}
+
+
+(1) zeigt die mit dem Littrow-Gitter kombinierte Laserdiode, der Winkel des Gitters gegenüber der Austrittsöffnung des Lasers kann über am Rahmen 
+angebrachte Stellschrauben variiert werden kann.
+Die Rubidiumzelle mit Fensterung (2) ist von einer Helmholtzspule umgeben, vor dem Fenster ist die Kamera (6) zur Aufnahme der Fluoreszenzlinie
+des Rubidiums positioniert.
+(3) zeigt die Stative von Laserkarte, Neutraldichtefilter und 50/50-Strahlteiler, die bei betreffenden Abschnitten des Versuchs in den Strahlengang zwischen
+Laserdiode und Rubidiumzelle eingebracht werden.
+(4) und (5) sind die Photodetektoren, mit deren Hilfe über das Lichtsignal als Spannung in das verwendete Oszilloskop für folgend beschriebene Untersuchungen eingekoppelt
+wird.
+
+
+
+
 
 \section{Durchführung}
 
@@ -232,7 +611,9 @@ Für das Verhältnis der beiden Isotope zueinander folgt
 \begin{equation*}
     R = \frac{F(^{85}\text{Rb})}{F(^{87}\text{Rb})} = \num{2.692 \pm 0.019}.
 \end{equation*}
+
 \newpage
+
 \section{Diskussion}
 Zur Diskussion der Auswertung werden die experimentell bestimmten Größen $x_{\text{exp}}$ im Folgenden über die relative Abweichung
 \begin{equation*}
@@ -266,12 +647,14 @@ gegenüber dem Literaturwert $R_{\text{lit}} = \num{72.17} / \num{27.83} \approx
 folgt. Da die Abweichung größer ist als die rein statistische Fitunsicherheit, dominieren hier die systematischen Fehlerquellen.
 
 Abschließend lässt sich sagen, dass neben der grundlegenden Funktionsweise eines Diodenlasers auch die Absorptionsspektroskopie an Rubidium sowie die Bestimmung des natürlichen Isotopenverhältnisses quantitativ sehr gut gezeigt werden konnten. 
+
+
 \newpage
 
 \begin{thebibliography}{9}
 
 \bibitem{siddons2008}
-P.~Siddons, C.~S.~Adams, C.~Ge und I.~G.~Hughes,
+P. Siddons, C. S. Adams, Ge und I. G. Hughes,
 \textit{Absolute absorption on rubidium D lines: comparison between theory and experiment},
 Journal of Physics B: Atomic, Molecular and Optical Physics \textbf{41}, 155004 (2008),
 DOI: \texttt{10.1088/0953-4075/41/15/155004}.
@@ -286,5 +669,58 @@ TeachSpin Inc.,
 \textit{Diode Laser Spectroscopy -- Manual},
 Buffalo, NY, USA.
 
+\bibitem{grundwissenHalbleiter}
+Grund-Wissen Physik: \textit{Leiter, Halbleiter und Isolatoren}, o. J.
+\url{https://grund-wissen.de/physik/elektrizitaet-und-magnetismus/leiter-halbleiter-isolator.html}
+(abgerufen am 21. November 2026).
+
+\bibitem{suetterlin2020}
+Sütterlin, Saskia: \textit{Entwurf und Untersuchung von elektrischen und thermischen Ferrofluidschaltern (Design and Analysis of Electrical and Thermal Ferrofluid Switches)}.
+Bachelorarbeit, Institut für Raumfahrtsysteme, Universität Stuttgart, 2020,
+IRS-20-S-095, Abb. 9.
+\url{https://www.researchgate.net/figure/An-electronic-band-structure-for-a-Conductor-b-Semiconductor-c-Dielectric-With_fig9_364080638}
+(abgerufen am 21. November 2026).
+
+\bibitem{boeglinPNJunction}
+Boeglin, W. U.: \textit{19. PN-Junction}.
+Modern Lab Experiments, Florida International University, o. J.
+\url{https://wanda.fiu.edu/boeglinw/courses/Modern_lab_manual3/pn_junction.html}
+(abgerufen am 21. November 2026).
+
+\bibitem{diodelaserphysics}
+TU Dortmund, Fakultät Physik: \textit{Diode Laser Physics}, 2026.
+
+\bibitem{chemie_hfs}
+Chemie.de: \textit{Hyperfeinstruktur}, Chemie-Lexikon, o. J.
+\url{https://www.chemie.de/lexikon/Hyperfeinstruktur.html}
+(abgerufen am 24. November 2026).
+
+\bibitem{kohaerenz}
+BiancaHögel.de: \textit{Kohärenz (Physik)}, o. J.
+\url{https://www.biancahoegel.de/optik/kohaerenz.html}
+(abgerufen am 24. November 2026).
+
+\bibitem{steck_coherence}
+Steck, Daniel A.: \textit{Quantum and Atom Optics}.
+Department of Physics, University of Oregon, Revision 0.16.7, 13. März 2026,
+Kapitel 2, S. 66 und 73.
+\url{https://atomoptics.uoregon.edu/~dsteck/teaching/quantum-optics/quantum-optics-notes.pdf}
+(abgerufen am 24. November 2026).
+
+\bibitem{deMatos_absorption}
+De Matos, Rodrigo: \textit{High Efficiency Solar Pumped Laser Through a Ring Array Concentrator}.
+Präsentation, Juli 2017, Abb. 2.
+ResearchGate:
+\url{https://www.researchgate.net/figure/Absorption-spontaneous-emission-and-stimulated-emission-17_fig2_322861305}
+(abgerufen am 24. November 2026).
+
+\bibitem{mitofsky_laser}
+Mitofsky, Andrea M.: \textit{7.3: Devices Involving Stimulated Emission},
+in: \textit{Direct Energy}, Engineering LibreTexts, zuletzt bearbeitet am
+22. Mai 2022.
+\url{https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Electro-Optics/Direct_Energy_(Mitofsky)/07:_Lamps_LEDs_and_Lasers/7.03:_Devices_Involving_Stimulated_Emission}
+(abgerufen am 24. November 2026).
+
 \end{thebibliography}
 \end{document}
+
